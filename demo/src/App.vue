@@ -13,7 +13,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
   <main style="height: 800px; max-height: 90vh; border-radius: 5px; overflow: hidden; background-color: #EDEDED;">
     <ricochet-container>
-      <div class="block"></div>
+      <div class="block block--wide"></div>
       <div class="block block--wide"></div>
       <div class="block block--tall"></div>
       <div class="block"></div>
@@ -41,8 +41,8 @@ header {
 }
 
 .block {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   background-color: hsla(160, 100%, 37%, 1);
   border-radius: 5px;
   border: 2px solid white;
@@ -61,27 +61,36 @@ header {
   animation: demo-height 3s infinite;
 }
 
+@keyframes demo-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes demo-width {
   0% {
-    width: 50px;
+    width: 30px;
   }
   50% {
-    width: 200px;
+    width: 100px;
   }
   0% {
-    width: 50px;
+    width: 30px;
   }
 }
 
 @keyframes demo-height {
   0% {
-    height: 50px;
+    height: 30px;
   }
   50% {
-    height: 200px;
+    height: 100px;
   }
   0% {
-    height: 50px;
+    height: 30px;
   }
 }
 

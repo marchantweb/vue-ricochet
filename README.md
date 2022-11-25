@@ -9,7 +9,7 @@ solutions, and other applications where you need to position elements on the scr
 npm install vue-ricochet
 ```
 
-Then simply call `app.use()` to install, wherever you create the VueJS app.
+Then simply call `app.use()` to install, wherever you create the VueJS app. Global options can also be passed using the second parameter.
 
 ```js
 import {createApp} from 'vue'
@@ -17,10 +17,7 @@ import ricochet from 'vue-ricochet'
 
 const app = createApp();
 
-app.use(ricochet, {
-    // Global configuration options...
-    fps: 30 // Default is 60, here we lower it for example purposes...
-});
+app.use(ricochet);
 
 app.mount('#app');
 ```
@@ -40,13 +37,7 @@ app.mount('#app');
 </template>
 ```
 
-By default, containers are responsive and fill the width/height of the parent DOM element. You can override this by setting the `width` and `height` props or by using CSS styles/classes.
-
-```html
-<ricochet-container width="800" height="600">
-    <!-- Elements go here -->
-</ricochet-container>
-```
+Containers are responsive and fill the width/height of the parent DOM element. They are absolutely positioned, so the parent must have `position: relative` or `position: absolute` set.
 
 You can also pass additional configuration parameters as a `config` object. To see a list of available options, see the [vue-container](#) documentation. These will override any global configuration options.
 
@@ -61,7 +52,7 @@ export default {
     data() {
         return {
             config: {
-                nestElements: true, // Wrap each element in the container in it's own DOM, and apply transformations to that instead.
+                unwrapElements: true, // Apply transforms to the elements directly, instead of wrapping them in a div.
             }
         }
     }
