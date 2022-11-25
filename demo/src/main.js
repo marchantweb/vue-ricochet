@@ -5,6 +5,8 @@ import ricochet from '../../index';
 import './assets/main.css'
 
 const app = createApp(App);
-app.use(ricochet);
+app.use(ricochet, {
+    fps: 120
+});
 
 app.mount('#app');

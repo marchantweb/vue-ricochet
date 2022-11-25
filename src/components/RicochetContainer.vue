@@ -13,11 +13,13 @@
 import _ from 'lodash';
 
 export default {
+
   data() {
     return {
       elements: [],
       changeObserver: null,
-      resizeObserver: null
+      resizeObserver: null,
+      repositionElements: _.throttle(this._handleReposition, (1000 / this.$ricochet._config.fps), {'trailing': false}),
     }
   },
   methods: {
@@ -41,7 +43,7 @@ export default {
     /**
      * Position elements in the ricochet container (throttled to the config FPS).
      */
-    repositionElements: _.throttle(function () {
+    _handleReposition() {
       this.elements = this.$el.children;
       let sumWidth = 0;
       let sumHeight = 0;
@@ -51,7 +53,7 @@ export default {
         sumWidth += element.offsetWidth;
         sumHeight += element.offsetHeight;
       }
-    }, (1000 / 120), {'trailing': false}),
+    }
 
   },
   computed: {

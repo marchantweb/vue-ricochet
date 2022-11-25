@@ -9,6 +9,15 @@ import RicochetContainer from './components/RicochetContainer.vue';
 
 class Ricochet {
 
+    // Default Configuration
+    _config = {
+
+        /**
+         * The frame rate at which to update elements positioned with ricochet (x per second)
+         */
+        fps: 60
+    }
+
     /**
      * Constructor implements a singleton pattern, returns existing instance if one exists
      * @returns {Ricochet}
@@ -26,6 +35,11 @@ class Ricochet {
      * @param options
      */
     install(app, options) {
+
+        // Merge options into _config
+        if (options) {
+            this._config = Object.assign(this._config, options);
+        }
 
         // Expose ricochet to the rest of the application
         app.config.globalProperties.$ricochet = this;
