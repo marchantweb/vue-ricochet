@@ -2,8 +2,8 @@
   <canvas :width="containerSize.width" :height="containerSize.height" class="ricochet-canvas canvas__anchors" ref="ricochet-canvas-anchor"/>
   <div class="ricochet-container" ref="ricochet-container">
     <template v-for="(vnode, index) in $slots.default()" :key="index">
-        <!--suppress JSValidateTypes -->
-        <component :is="vnode" :ref="'element--' + index" :style="elementStyles[index]"/>
+      <!--suppress JSValidateTypes -->
+      <component :is="vnode" :ref="'element--' + index" :style="elementStyles[index]"/>
     </template>
   </div>
 </template>
@@ -11,9 +11,14 @@
 <script>
 import _ from 'lodash';
 import layoutChain from "../layouts/chain";
+import layoutCircle from "../layouts/circle";
 
 export default {
-
+  props: {
+    type: {
+      default: 'circle'
+    },
+  },
   data() {
     return {
       elements: [],
@@ -58,7 +63,16 @@ export default {
      */
     _handleReposition() {
       this.elements = [].slice.call(this.$refs['ricochet-container'].children);
-      this.layout = layoutChain(this.elements);
+      if (this.type === 'circle') {
+        this.layout = layoutCircle(this.elements, {
+          center: {
+            x: this.containerSize.width / 2,
+            y: this.containerSize.height / 2
+          },
+        });
+      } else {
+        this.layout = layoutChain(this.elements);
+      }
     },
 
     /**
@@ -86,15 +100,17 @@ export default {
      * Returns an array of styles for each element in the container.
      * @returns {*[]}
      */
-    elementStyles(){
+    elementStyles() {
       let styles = [];
-      for (let i = 0; i < this.elements.length; i++){
-        styles.push({
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          'transform': "translate(" + this.layout[i].x + "px, " + this.layout[i].y + "px)",
-        });
+      if(this.layout && this.layout.length && this.elements.length === this.layout.length){
+        for (let i = 0; i < this.elements.length; i++) {
+          styles.push({
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            'transform': "translate(" + this.layout[i].x + "px, " + this.layout[i].y + "px)",
+          });
+        }
       }
       return styles;
     },

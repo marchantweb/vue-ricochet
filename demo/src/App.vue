@@ -12,7 +12,7 @@ import HelloWorld from './components/HelloWorld.vue'
   </header>
 
   <main style="height: 800px; max-height: 90vh; border-radius: 5px; overflow: hidden; background-color: #EDEDED;">
-    <ricochet-container>
+    <ricochet-container type="circle">
       <div class="block block--wide"></div>
       <div class="block block--wide"></div>
       <div class="block block--tall"></div>
