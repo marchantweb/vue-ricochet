@@ -14,11 +14,11 @@ import HelloWorld from './components/HelloWorld.vue'
   <main style="height: 800px; max-height: 90vh; border-radius: 5px; overflow: hidden; background-color: #EDEDED;">
     <ricochet-container>
       <div class="block"></div>
+      <div class="block block--wide"></div>
+      <div class="block block--tall"></div>
       <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
+      <div class="block block--wide block--tall"></div>
+      <div class="block block--wide"></div>
     </ricochet-container>
   </main>
 </template>
@@ -33,13 +33,45 @@ header {
   margin: 0 auto 2rem;
 }
 
-.block{
+.block {
   width: 50px;
   height: 50px;
   background-color: hsla(160, 100%, 37%, 1);
   border-radius: 5px;
   border: 2px solid white;
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px 0;
+}
+
+.block--wide {
+  animation: demo-width 4s infinite;
+}
+
+.block--tall {
+  animation: demo-height 3s infinite;
+}
+
+@keyframes demo-width {
+  0% {
+    width: 50px;
+  }
+  50% {
+    width: 200px;
+  }
+  0% {
+    width: 50px;
+  }
+}
+
+@keyframes demo-height {
+  0% {
+    height: 50px;
+  }
+  50% {
+    height: 200px;
+  }
+  0% {
+    height: 50px;
+  }
 }
 
 @media (min-width: 1024px) {
