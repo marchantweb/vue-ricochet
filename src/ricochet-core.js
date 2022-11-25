@@ -5,6 +5,8 @@
  * @author: Simon Le Marchant, simon@marchantweb.com
 */
 
+import RicochetContainer from './components/RicochetContainer.vue';
+
 class Ricochet {
 
     /**
@@ -16,7 +18,6 @@ class Ricochet {
             return Ricochet._instance
         }
         Ricochet._instance = this;
-        console.log('Ricochet Instantiated');
     }
 
     /**
@@ -25,7 +26,13 @@ class Ricochet {
      * @param options
      */
     install(app, options) {
-        console.log("Installing Ricochet as VueJS Plugin", app, options);
+
+        // Expose ricochet to the rest of the application
+        app.config.globalProperties.$ricochet = this;
+        app.provide('ricochet', this);
+
+        // Declare the components
+        app.component("ricochet-container", RicochetContainer);
     }
 }
 
