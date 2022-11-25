@@ -1,9 +1,9 @@
 <template>
-  <canvas width="200" height="100" style="border:1px solid #000000;" class="ricochet-helpers" />
+  <canvas :width="containerSize.width" :height="containerSize.height" class="ricochet-canvas canvas__anchors" ref="ricochet-canvas-anchor"/>
   <div class="ricochet-container" ref="ricochet-container">
     <template v-for="(vnode, index) in $slots.default()" :key="index">
-        <!--suppress JSValidateTypes -->
-        <component :is="vnode" :ref="'element--' + index"/>
+      <!--suppress JSValidateTypes -->
+      <component :is="vnode" :ref="'element--' + index"/>
     </template>
   </div>
 </template>
@@ -18,24 +18,36 @@ export default {
       elements: [],
       changeObserver: null,
       resizeObserver: null,
+      resizeElementObserver: null,
       repositionElements: _.throttle(this._handleReposition, (1000 / this.$ricochet._config.fps), {'trailing': false}),
+      containerSize: {
+        width: 0,
+        height: 0
+      }
     }
   },
   methods: {
 
     /**
-     * Position the initial elements, and watch for changes to the DOM.
+     * Setup observers to watch for changes to the container and its children.
      */
     setupObservers() {
       this.changeObserver = new MutationObserver(function (mutations) {
         this.repositionElements();
       }.bind(this));
       this.resizeObserver = new ResizeObserver(function (entries) {
+        this.updateContainerSize();
         this.repositionElements();
       }.bind(this));
+      this.resizeElementObserver = new ResizeObserver(function (entries) {
+        this.repositionElements();
+      }.bind(this));
+      // Observe the container for changes/resize
       this.changeObserver.observe(this.$refs['ricochet-container'], {attributes: false, childList: true, characterData: false, subtree: false});
+      this.resizeObserver.observe(this.$refs['ricochet-container']);
+      // Observe each element for resize
       for (const element of this.elements) {
-        this.resizeObserver.observe(element);
+        this.resizeElementObserver.observe(element);
       }
     },
 
@@ -53,6 +65,16 @@ export default {
         sumWidth += element.offsetWidth;
         sumHeight += element.offsetHeight;
       }
+    },
+
+    /**
+     * Handle the resize event.
+     */
+    updateContainerSize() {
+      if (this.$refs['ricochet-container']) {
+        this.containerSize.width = this.$refs['ricochet-container'].offsetWidth;
+        this.containerSize.height = this.$refs['ricochet-container'].offsetHeight;
+      }
     }
 
   },
@@ -68,6 +90,7 @@ export default {
 
   },
   mounted() {
+    this.updateContainerSize();
     this.repositionElements();
     this.setupObservers();
   },
@@ -77,7 +100,7 @@ export default {
      * Clean-up the change and resize observers
      */
     this.changeObserver.disconnect();
-    this.resizeObserver.disconnect();
+    this.resizeElementObserver.disconnect();
   }
 }
 </script>
@@ -90,6 +113,20 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.ricochet-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
 }
 
 </style>
