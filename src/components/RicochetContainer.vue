@@ -62,6 +62,9 @@ export default {
      * Position elements in the ricochet container (throttled to the config FPS).
      */
     _handleReposition() {
+      if (!this.$refs['ricochet-container']) {
+        return;
+      }
       this.elements = [].slice.call(this.$refs['ricochet-container'].children);
       if (this.type === 'circle') {
         this.layout = layoutCircle(this.elements, {
@@ -102,7 +105,7 @@ export default {
      */
     elementStyles() {
       let styles = [];
-      if(this.layout && this.layout.length && this.elements.length === this.layout.length){
+      if (this.layout && this.layout.length && this.elements.length === this.layout.length) {
         for (let i = 0; i < this.elements.length; i++) {
           styles.push({
             position: 'absolute',

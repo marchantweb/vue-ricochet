@@ -1,5 +1,22 @@
-<script setup>
+<script>
 import HelloWorld from './components/HelloWorld.vue'
+
+export default {
+  name: 'Demo',
+  components: {
+    HelloWorld
+  },
+  data() {
+    return {
+      type: 'chain'
+    }
+  },
+  methods: {
+    setType(type) {
+      this.type = type
+    }
+  }
+}
 </script>
 
 <template>
@@ -8,11 +25,15 @@ import HelloWorld from './components/HelloWorld.vue'
 
     <div class="wrapper">
       <HelloWorld msg="🥏 vue-ricochet"/>
+      <div style="margin-top: 20px; width: 100%; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+        <button @click.prevent="setType('chain')">Stacked Chain</button>
+        <button @click.prevent="setType('circle')">Circle</button>
+      </div>
     </div>
   </header>
 
   <main style="height: 800px; max-height: 90vh; border-radius: 5px; overflow: hidden; background-color: #EDEDED;">
-    <ricochet-container type="circle">
+    <ricochet-container :type="type">
       <div class="block block--wide"></div>
       <div class="block block--wide"></div>
       <div class="block block--tall"></div>

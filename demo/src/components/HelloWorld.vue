@@ -11,7 +11,7 @@ defineProps({
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
     <h3>
-      Ricochet is a lightweight JS library that integrates with VueJS and provides creative options for object positioning. This is a demo page showing some of the core features.
+      Ricochet is a lightweight JS library that integrates with VueJS and provides creative options for object positioning. This is a demo page showing some creative uses.
     </h3>
   </div>
 </template>
