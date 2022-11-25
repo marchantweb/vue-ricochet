@@ -12,6 +12,7 @@
 import _ from 'lodash';
 import layoutChain from "../layouts/chain";
 import layoutCircle from "../layouts/circle";
+import layoutArc from "../layouts/arc";
 
 export default {
   props: {
@@ -72,6 +73,15 @@ export default {
             x: this.containerSize.width / 2,
             y: this.containerSize.height / 2
           },
+        });
+      } else if (this.type === 'arc') {
+        this.layout = layoutArc(this.elements, {
+          center: {
+            x: this.containerSize.width / 2,
+            y: this.containerSize.height / 2
+          },
+          startAngle: 0,
+          endAngle: 180,
         });
       } else {
         this.layout = layoutChain(this.elements);
