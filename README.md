@@ -60,9 +60,7 @@ export default {
     data() {
         return {
             config: {
-                snapToPixels: true,
-                frameRate: 60,
-                // ... other config options
+                fps: 120
             }
         }
     }
