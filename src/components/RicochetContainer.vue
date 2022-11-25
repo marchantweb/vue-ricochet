@@ -1,10 +1,9 @@
 <template>
+  <canvas width="200" height="100" style="border:1px solid #000000;" class="ricochet-helpers" />
   <div class="ricochet-container" ref="ricochet-container">
     <template v-for="(vnode, index) in $slots.default()" :key="index">
-      <div class="ricochet-container__element">
         <!--suppress JSValidateTypes -->
         <component :is="vnode" :ref="'element--' + index"/>
-      </div>
     </template>
   </div>
 </template>
@@ -48,6 +47,7 @@ export default {
       let sumWidth = 0;
       let sumHeight = 0;
       for (const element of this.elements) {
+        element.style.setProperty("position", "absolute");
         element.style.setProperty("left", (sumWidth) + "px");
         element.style.setProperty("top", (sumHeight) + "px");
         sumWidth += element.offsetWidth;
@@ -90,10 +90,6 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-}
-
-.ricochet-container__element {
-  position: absolute;
 }
 
 </style>

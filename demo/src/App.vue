@@ -17,8 +17,15 @@ import HelloWorld from './components/HelloWorld.vue'
       <div class="block block--wide"></div>
       <div class="block block--tall"></div>
       <div class="block"></div>
-      <div class="block block--wide block--tall"></div>
       <div class="block block--wide"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block block--wide"></div>
+      <div class="block block--tall"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
     </ricochet-container>
   </main>
 </template>
@@ -40,6 +47,10 @@ header {
   border-radius: 5px;
   border: 2px solid white;
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px 0;
+}
+
+.block:nth-child(2n) {
+  background-color: #34495E;
 }
 
 .block--wide {
