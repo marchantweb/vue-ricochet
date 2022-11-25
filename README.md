@@ -19,6 +19,7 @@ const app = createApp();
 
 app.use(ricochet, {
     // Global configuration options...
+    fps: 30 // Default is 60, here we lower it for example purposes...
 });
 
 app.mount('#app');
@@ -47,7 +48,7 @@ By default, containers are responsive and fill the width/height of the parent DO
 </ricochet-container>
 ```
 
-You can also pass additional configuration parameters as a `config` object. To see a list of available options, see the [vue-container](#) documentation.
+You can also pass additional configuration parameters as a `config` object. To see a list of available options, see the [vue-container](#) documentation. These will override any global configuration options.
 
 ```html
 <ricochet-container :config="config">
