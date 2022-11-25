@@ -44,7 +44,7 @@ export default {
      * Position elements in the ricochet container (throttled to the config FPS).
      */
     _handleReposition() {
-      this.elements = this.$el.children;
+      this.elements = this.$refs['ricochet-container'].children;
       let sumWidth = 0;
       let sumHeight = 0;
       for (const element of this.elements) {
