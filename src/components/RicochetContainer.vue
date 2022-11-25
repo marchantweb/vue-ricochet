@@ -10,12 +10,14 @@
 </template>
 
 <script>
+import _ from 'lodash';
+
 export default {
   data() {
     return {
       elements: [],
       changeObserver: null,
-      resizeObserver: null,
+      resizeObserver: null
     }
   },
   methods: {
@@ -23,35 +25,24 @@ export default {
     /**
      * Position the initial elements, and watch for changes to the DOM.
      */
-    initialContainerSetup() {
-      this.registerElements();
-      this.positionElements();
+    setupObservers() {
       this.changeObserver = new MutationObserver(function (mutations) {
-        this.registerElements();
-        this.positionElements();
+        this.repositionElements();
       }.bind(this));
       this.resizeObserver = new ResizeObserver(function (entries) {
-        console.log("Resize observed");
-        this.registerElements();
-        this.positionElements();
+        this.repositionElements();
       }.bind(this));
       this.changeObserver.observe(this.$refs['ricochet-container'], {attributes: false, childList: true, characterData: false, subtree: false});
-      for(const element of this.elements){
+      for (const element of this.elements) {
         this.resizeObserver.observe(element);
       }
     },
 
     /**
-     * Capture the array of vnodes that exist within the container.
+     * Position elements in the ricochet container (throttled to the config FPS).
      */
-    registerElements() {
+    repositionElements: _.throttle(function () {
       this.elements = this.$el.children;
-    },
-
-    /**
-     * Position elements in the ricochet container
-     */
-    positionElements() {
       let sumWidth = 0;
       let sumHeight = 0;
       for (const element of this.elements) {
@@ -60,7 +51,7 @@ export default {
         sumWidth += element.offsetWidth;
         sumHeight += element.offsetHeight;
       }
-    }
+    }, (1000 / 120), {'trailing': false}),
 
   },
   computed: {
@@ -75,7 +66,8 @@ export default {
 
   },
   mounted() {
-    this.initialContainerSetup();
+    this.repositionElements();
+    this.setupObservers();
   },
   beforeDestroy: function () {
 

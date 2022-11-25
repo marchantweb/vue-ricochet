@@ -13,5 +13,8 @@
     "ricochet",
     "vue-ricochet",
     "creative programming"
-  ]
+  ],
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }
