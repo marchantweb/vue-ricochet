@@ -61,7 +61,7 @@ export default {
     data() {
         return {
             config: {
-                fps: 120
+                nestElements: true, // Wrap each element in the container in it's own DOM, and apply transformations to that instead.
             }
         }
     }
