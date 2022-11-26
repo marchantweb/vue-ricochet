@@ -26,14 +26,21 @@ app.mount('#app');
 
 ### `ricochet-container`
 
-**Ricochet** positions elements within containers. Think of a container as a canvas on which you can position elements. You can have multiple containers on a page, it's just a component.
+**Ricochet** positions elements within containers. Think of a container like a list of DOM elements you want to display. Containers support any DOM element you can imagine, including other Vue components. You can have multiple containers on a page, it's just a component.
 
 ```html
 
 <template>
+    
     <ricochet-container>
+        
         <!-- Elements go here -->
+        <div class="team-bio"></div>
+        <img src="./myimage.jpg" alt="My Image">
+        <myCustomVueComponent></myCustomVueComponent>
+        
     </ricochet-container>
+    
 </template>
 ```
 

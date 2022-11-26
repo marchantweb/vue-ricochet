@@ -35,11 +35,16 @@ export default {
   </header>
 
   <main style="height: 800px; max-height: 90vh; border-radius: 5px; overflow: hidden; background-color: #EDEDED;">
+
+    <!-- Start Ricochet Example -->
     <ricochet-container :type="type">
       <div class="block block--wide"></div>
       <div class="block block--wide"></div>
+      <div class="block"></div>
+      <div class="block"></div>
       <div class="block block--tall"></div>
       <div class="block"></div>
+      <h4>This is <strong style="font-weight: bold !important">vue-ricochet</strong>.</h4>
       <div class="block block--wide"></div>
       <div class="block"></div>
       <div class="block"></div>
@@ -50,6 +55,8 @@ export default {
       <div class="block"></div>
       <div class="block"></div>
     </ricochet-container>
+    <!-- End Ricochet Example -->
+
   </main>
 </template>
 
