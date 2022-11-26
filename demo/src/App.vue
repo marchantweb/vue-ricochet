@@ -25,6 +25,7 @@ export default {
 
     <div class="wrapper">
       <HelloWorld msg="🥏 vue-ricochet"/>
+      <h5 style="font-weight: bold; width: 100%; text-align: center; margin-top: 40px;">Examples:</h5>
       <div style="margin-top: 20px; width: 100%; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
         <button @click.prevent="setType('line')">Line</button>
         <button @click.prevent="setType('chain')">Chain</button>
@@ -44,11 +45,10 @@ export default {
       <div class="block"></div>
       <div class="block block--tall"></div>
       <div class="block"></div>
-      <h4>This is <strong style="font-weight: bold !important">vue-ricochet</strong>.</h4>
+      <h2>This is <strong style="font-weight: bold !important">vue-ricochet</strong>.</h2>
       <div class="block block--wide"></div>
       <div class="block"></div>
-      <div class="block"></div>
-      <div class="block block--wide"></div>
+      <h4>Flexible <strong style="font-weight: bold !important">creative layouts</strong>.</h4>
       <div class="block block--tall"></div>
       <div class="block"></div>
       <div class="block"></div>

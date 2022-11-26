@@ -1,7 +1,7 @@
 # 🥏 vue-ricochet
 
-Ricochet is a lightweight JS library for **creative object positioning in Vue 3**. It is intended for use in creative programming applications, digital signage
-solutions, and other applications where you need to position elements on the screen in a creative way.
+**A lightweight VueJS plugin library that provides flexibility for creative object layouts.** It is intended for use in creative programming applications, digital signage
+solutions, and other applications where you need to position multiple _(sometimes dynamic)_ elements on the screen in a non-standard way.
 
 ## 📦 Installation
 
