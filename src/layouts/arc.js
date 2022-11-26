@@ -9,7 +9,7 @@ export default function layoutArc(elements = [], options = {
     let output = [];
     for (let i = 0; i < elements.length; i++) {
         const element = elements[i];
-        const indexAsPercentage = (1 / elements.length) * i;
+        const indexAsPercentage = (1 / (elements.length - 1)) * i;
         const arcDegrees = options.endAngle - options.startAngle;
         output.push({
             x: options.center.x + (Math.cos(((arcDegrees * indexAsPercentage) + options.startAngle) * (Math.PI / 180)) * 300) - element.offsetWidth / 2,

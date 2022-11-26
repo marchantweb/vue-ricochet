@@ -13,6 +13,7 @@ import _ from 'lodash';
 import layoutChain from "../layouts/chain";
 import layoutCircle from "../layouts/circle";
 import layoutArc from "../layouts/arc";
+import layoutLine from "../layouts/line";
 
 export default {
   props: {
@@ -82,6 +83,17 @@ export default {
           },
           startAngle: 0,
           endAngle: 180,
+        });
+      } else if (this.type === 'line') {
+        this.layout = layoutLine(this.elements, {
+          start: {
+            x: 50,
+            y: 50
+          },
+          end: {
+            x: (this.containerSize.width) - 50,
+            y: (this.containerSize.height) - 50
+          },
         });
       } else {
         this.layout = layoutChain(this.elements);

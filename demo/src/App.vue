@@ -8,7 +8,7 @@ export default {
   },
   data() {
     return {
-      type: 'chain'
+      type: 'line'
     }
   },
   methods: {
@@ -26,6 +26,7 @@ export default {
     <div class="wrapper">
       <HelloWorld msg="🥏 vue-ricochet"/>
       <div style="margin-top: 20px; width: 100%; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+        <button @click.prevent="setType('line')">Line</button>
         <button @click.prevent="setType('chain')">Chain</button>
         <button @click.prevent="setType('circle')">Circle</button>
         <button @click.prevent="setType('arc')">Arc</button>
