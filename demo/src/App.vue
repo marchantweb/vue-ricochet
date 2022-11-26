@@ -45,7 +45,7 @@ export default {
       <div class="block"></div>
       <div class="block block--tall"></div>
       <div class="block"></div>
-      <h2>This is <strong style="font-weight: bold !important">vue-ricochet</strong>.</h2>
+      <h2>This is <strong style="font-weight: bold !important">🥏vue-ricochet</strong>.</h2>
       <div class="block block--wide"></div>
       <div class="block"></div>
       <h4>Flexible <strong style="font-weight: bold !important">creative layouts</strong>.</h4>
