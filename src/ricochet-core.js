@@ -46,7 +46,7 @@ class Ricochet {
         app.provide('ricochet', this);
 
         // Declare the components
-        app.component("ricochet-container", RicochetContainer);
+        app.component("ricochetContainer", RicochetContainer);
     }
 }
 

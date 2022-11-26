@@ -1,6 +1,6 @@
 <template>
   <canvas :width="containerSize.width" :height="containerSize.height" class="ricochet-canvas canvas__anchors" ref="ricochet-canvas-anchor"/>
-  <div class="ricochet-container" ref="ricochet-container">
+  <div class="ricochet-container" ref="ricochetContainer">
     <template v-for="(vnode, index) in $slots.default()" :key="index">
       <!--suppress JSValidateTypes -->
       <component :is="vnode" :ref="'element--' + index" :style="elementStyles[index]"/>
@@ -52,8 +52,8 @@ export default {
         this.repositionElements();
       }.bind(this));
       // Observe the container for changes/resize
-      this.changeObserver.observe(this.$refs['ricochet-container'], {attributes: false, childList: true, characterData: false, subtree: false});
-      this.resizeObserver.observe(this.$refs['ricochet-container']);
+      this.changeObserver.observe(this.$refs['ricochetContainer'], {attributes: false, childList: true, characterData: false, subtree: false});
+      this.resizeObserver.observe(this.$refs['ricochetContainer']);
       // Observe each element for resize
       for (const element of this.elements) {
         this.resizeElementObserver.observe(element);
@@ -64,10 +64,10 @@ export default {
      * Position elements in the ricochet container (throttled to the config FPS).
      */
     _handleReposition() {
-      if (!this.$refs['ricochet-container']) {
+      if (!this.$refs['ricochetContainer']) {
         return;
       }
-      this.elements = [].slice.call(this.$refs['ricochet-container'].children);
+      this.elements = [].slice.call(this.$refs['ricochetContainer'].children);
       if (this.type === 'circle') {
         this.layout = layoutCircle(this.elements, {
           center: {
@@ -104,9 +104,9 @@ export default {
      * Handle the resize event.
      */
     updateContainerSize() {
-      if (this.$refs['ricochet-container']) {
-        this.containerSize.width = this.$refs['ricochet-container'].offsetWidth;
-        this.containerSize.height = this.$refs['ricochet-container'].offsetHeight;
+      if (this.$refs['ricochetContainer']) {
+        this.containerSize.width = this.$refs['ricochetContainer'].offsetWidth;
+        this.containerSize.height = this.$refs['ricochetContainer'].offsetHeight;
       }
     }
 

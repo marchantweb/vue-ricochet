@@ -37,7 +37,7 @@ export default {
   <main style="height: 800px; max-height: 90vh; border-radius: 5px; overflow: hidden; background-color: #EDEDED;">
 
     <!-- Start Ricochet Example -->
-    <ricochet-container :type="type">
+    <ricochetContainer :type="type">
       <div class="block block--wide"></div>
       <div class="block block--wide"></div>
       <div class="block"></div>
@@ -54,7 +54,7 @@ export default {
       <div class="block"></div>
       <div class="block"></div>
       <div class="block"></div>
-    </ricochet-container>
+    </ricochetContainer>
     <!-- End Ricochet Example -->
 
   </main>
