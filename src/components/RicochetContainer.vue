@@ -28,9 +28,10 @@ export default {
       elements: [],
       layout: null,
       priorLayouts: [
-        /*{
-          shape: 'circle'
-        }*/
+        {
+          shape: 'circle',
+          exitPercentage: 0
+        }
       ],
       changeObserver: null,
       resizeObserver: null,
@@ -167,10 +168,10 @@ export default {
     outputLayout() {
       let blendedLayout = this.layout;
       if (this.priorLayouts.length) {
-        this.priorLayouts.forEach((priorLayout) => {
-          this.calculateLayout(priorLayout).forEach((element, elementIndex) => {
-            blendedLayout[elementIndex].x = (blendedLayout[elementIndex].x + element.x) / 2;
-            blendedLayout[elementIndex].y = (blendedLayout[elementIndex].y + element.y) / 2;
+        this.priorLayouts.forEach((priorLayoutConfig) => {
+          this.calculateLayout(priorLayoutConfig).forEach((priorLayout, elementIndex) => {
+            blendedLayout[elementIndex].x = blendedLayout[elementIndex].x + ((1 - priorLayoutConfig.exitPercentage) * (priorLayout.x - blendedLayout[elementIndex].x))
+            blendedLayout[elementIndex].y = blendedLayout[elementIndex].y + ((1 - priorLayoutConfig.exitPercentage) * (priorLayout.y - blendedLayout[elementIndex].y))
           });
         });
       }
