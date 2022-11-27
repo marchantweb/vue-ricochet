@@ -10,7 +10,7 @@ defineProps({
 <template>
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
-    <h2>Absolute positioning library.</h2>
+    <h2>Object positioning library.</h2>
     <h3>
       A lightweight, modern and flexible Vue 3 plugin for creative, responsive object layouts.
     </h3>
