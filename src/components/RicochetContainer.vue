@@ -27,6 +27,11 @@ export default {
     return {
       elements: [],
       layout: null,
+      priorLayouts: [
+        /*{
+          shape: 'circle'
+        }*/
+      ],
       changeObserver: null,
       resizeObserver: null,
       resizeElementObserver: null,
@@ -72,15 +77,24 @@ export default {
         return;
       }
       this.elements = [].slice.call(this.$refs['ricochetContainer'].children);
-      if (this.config.shape === 'circle') {
-        this.layout = layoutCircle(this.elements, {
+      this.layout = this.calculateLayout(this.config);
+    },
+
+    /**
+     * Calculate the layout based on a passed configuration.
+     * @param config
+     * @returns {[]|*}
+     */
+    calculateLayout(config) {
+      if (config.shape === 'circle') {
+        return layoutCircle(this.elements, {
           center: {
             x: this.containerSize.width / 2,
             y: this.containerSize.height / 2
           },
         });
-      } else if (this.config.shape === 'arc') {
-        this.layout = layoutArc(this.elements, {
+      } else if (config.shape === 'arc') {
+        return layoutArc(this.elements, {
           center: {
             x: this.containerSize.width / 2,
             y: this.containerSize.height / 2
@@ -88,8 +102,8 @@ export default {
           startAngle: 0,
           endAngle: 180,
         });
-      } else if (this.config.shape === 'line') {
-        this.layout = layoutLine(this.elements, {
+      } else if (config.shape === 'line') {
+        return layoutLine(this.elements, {
           start: {
             x: 50,
             y: 50
@@ -100,10 +114,9 @@ export default {
           },
         });
       } else {
-        this.layout = layoutChain(this.elements);
+        return layoutChain(this.elements);
       }
-    }
-    ,
+    },
 
     /**
      * Handle the resize event.
@@ -134,19 +147,35 @@ export default {
      */
     elementStyles() {
       let styles = [];
-      if (this.layout && this.layout.length && this.elements.length === this.layout.length) {
+      if (this.outputLayout && this.outputLayout.length && this.elements.length === this.outputLayout.length) {
         for (let i = 0; i < this.elements.length; i++) {
           styles.push({
             position: 'absolute',
             top: 0,
             left: 0,
-            'transform': "translate(" + this.layout[i].x + "px, " + this.layout[i].y + "px)",
+            'transform': "translate(" + this.outputLayout[i].x + "px, " + this.outputLayout[i].y + "px)",
           });
         }
       }
       return styles;
-    }
-    ,
+    },
+
+    /**
+     * Outputs the final layout by taking the current layout and blending prior layouts based on their interpolated weight as they exit.
+     * @returns {null}
+     */
+    outputLayout() {
+      let blendedLayout = this.layout;
+      if (this.priorLayouts.length) {
+        this.priorLayouts.forEach((priorLayout) => {
+          this.calculateLayout(priorLayout).forEach((element, elementIndex) => {
+            blendedLayout[elementIndex].x = (blendedLayout[elementIndex].x + element.x) / 2;
+            blendedLayout[elementIndex].y = (blendedLayout[elementIndex].y + element.y) / 2;
+          });
+        });
+      }
+      return blendedLayout;
+    },
 
   }
   ,
