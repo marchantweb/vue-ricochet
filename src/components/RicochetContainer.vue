@@ -33,7 +33,8 @@ export default {
       changeObserver: null,
       resizeObserver: null,
       resizeElementObserver: null,
-      repositionElements: _.throttle(this._handleReposition, (1000 / this.$ricochet._config.fps), {'trailing': false}),
+      //repositionElements: _.throttle(this._handleReposition, (1000 / this.$ricochet._config.fps), {'trailing': false, 'leading': true}),
+      repositionElements: this._handleReposition,
       containerSize: {
         width: 0,
         height: 0
@@ -145,10 +146,11 @@ export default {
      */
     elementStyles() {
       let styles = [];
-      if (this.outputLayout && this.outputLayout.length && this.elements.length === this.outputLayout.length) {
+      if (this.outputLayout && this.elements.length === this.outputLayout.length) {
         for (let i = 0; i < this.elements.length; i++) {
           styles.push({
             position: 'absolute',
+            transition: 'none',
             top: 0,
             left: 0,
             'transform': "translate(" + this.outputLayout[i].x + "px, " + this.outputLayout[i].y + "px)",
@@ -190,8 +192,14 @@ export default {
         shape: oldValue,
         exitPercentage: 0
       });
-      gsap.to(this.priorLayouts[this.priorLayouts.length - 1], {exitPercentage: 1, duration: 1});
-    }
+      gsap.to(this.priorLayouts[this.priorLayouts.length - 1], {
+        exitPercentage: 1,
+        duration: 1,
+        onUpdate : function(){
+          this.repositionElements();
+        }.bind(this),
+      });
+    },
 
   },
   beforeDestroy: function () {
