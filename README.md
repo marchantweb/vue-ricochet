@@ -1,4 +1,6 @@
 # 🥏 vue-ricochet
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/marchantweb/vue-ricochet/main?style=flat-square)
+![npm](https://img.shields.io/npm/v/vue-ricochet?style=flat-square)
 
 **A lightweight, modern and flexible Vue 3 plugin for creative, responsive object layouts.** It is intended for use in creative programming applications, digital signage
 solutions, and other applications where you need to position multiple _(sometimes dynamic)_ elements on the screen in a non-standard way.
