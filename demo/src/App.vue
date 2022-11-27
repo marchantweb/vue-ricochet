@@ -22,7 +22,8 @@ export default {
         for (const element of elements) {
           output.push({
             x: sumWidth,
-            y: 300
+            y: 300 + (Math.sin(new Date().getTime() / 400) * 100)
+
           });
           sumWidth += element.offsetWidth;
         }
