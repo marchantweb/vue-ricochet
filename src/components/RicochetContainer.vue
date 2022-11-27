@@ -17,9 +17,11 @@ import layoutLine from "../layouts/line";
 
 export default {
   props: {
-    type: {
-      default: 'circle'
-    },
+    config: {
+      default: {
+        type: 'line'
+      },
+    }
   },
   data() {
     return {
@@ -34,7 +36,8 @@ export default {
         height: 0
       }
     }
-  },
+  }
+  ,
   methods: {
 
     /**
@@ -58,7 +61,8 @@ export default {
       for (const element of this.elements) {
         this.resizeElementObserver.observe(element);
       }
-    },
+    }
+    ,
 
     /**
      * Position elements in the ricochet container (throttled to the config FPS).
@@ -68,14 +72,14 @@ export default {
         return;
       }
       this.elements = [].slice.call(this.$refs['ricochetContainer'].children);
-      if (this.type === 'circle') {
+      if (this.config.type === 'circle') {
         this.layout = layoutCircle(this.elements, {
           center: {
             x: this.containerSize.width / 2,
             y: this.containerSize.height / 2
           },
         });
-      } else if (this.type === 'arc') {
+      } else if (this.config.type === 'arc') {
         this.layout = layoutArc(this.elements, {
           center: {
             x: this.containerSize.width / 2,
@@ -84,7 +88,7 @@ export default {
           startAngle: 0,
           endAngle: 180,
         });
-      } else if (this.type === 'line') {
+      } else if (this.config.type === 'line') {
         this.layout = layoutLine(this.elements, {
           start: {
             x: 50,
@@ -98,7 +102,8 @@ export default {
       } else {
         this.layout = layoutChain(this.elements);
       }
-    },
+    }
+    ,
 
     /**
      * Handle the resize event.
@@ -110,7 +115,8 @@ export default {
       }
     }
 
-  },
+  }
+  ,
   computed: {
 
     /**
@@ -119,7 +125,8 @@ export default {
      */
     elementCount() {
       return this.elements.length;
-    },
+    }
+    ,
 
     /**
      * Returns an array of styles for each element in the container.
@@ -138,14 +145,17 @@ export default {
         }
       }
       return styles;
-    },
+    }
+    ,
 
-  },
+  }
+  ,
   mounted() {
     this.updateContainerSize();
     this.repositionElements();
     this.setupObservers();
-  },
+  }
+  ,
   beforeDestroy: function () {
 
     /**

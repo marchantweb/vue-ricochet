@@ -15,6 +15,19 @@ export default {
     setType(type) {
       this.type = type
     }
+  },
+  computed: {
+
+    /**
+     * The configuration of the demo ricochetContainer
+     * @returns {{type: string}}
+     */
+    config() {
+      return {
+        type: this.type
+      }
+    }
+
   }
 }
 </script>
@@ -38,17 +51,17 @@ export default {
   <main style="height: 800px; max-height: 90vh; border-radius: 5px; overflow: hidden; background-color: #EDEDED;">
 
     <!-- Start Ricochet Example -->
-    <ricochetContainer :type="type">
+    <ricochetContainer :config="config">
       <div class="block block--wide"></div>
       <div class="block block--wide"></div>
       <div class="block"></div>
       <div class="block"></div>
       <div class="block block--tall"></div>
       <div class="block"></div>
-      <h2>This is <strong style="font-weight: bold !important">🥏vue-ricochet</strong>.</h2>
+      <h2 style="font-weight: bold !important">🥏vue-ricochet</h2>
       <div class="block block--wide"></div>
       <div class="block"></div>
-      <h4>Creative <strong style="font-weight: bold !important">object layouts</strong>.</h4>
+      <h4 style="font-weight: bold !important">Object positioning library</h4>
       <div class="block block--tall"></div>
       <div class="block"></div>
       <div class="block"></div>
