@@ -15,11 +15,7 @@ Then simply call `app.use(ricochet)` to install before mounting your application
 import {createApp} from 'vue'
 import ricochet from 'vue-ricochet'
 
-const app = createApp();
-
-app.use(ricochet);
-
-app.mount('#app');
+const app = createApp().use(ricochet).mount('#app');
 ```
 
 Vue-ricochet will available globally in your application, under `this.$ricochet`, although most of the time you will use components/directives to interact with it.
