@@ -1,6 +1,6 @@
 # 🥏 vue-ricochet
 
-**A lightweight, modern and flexible VueJS plugin for creative, responsive object layouts.** It is intended for use in creative programming applications, digital signage
+**A lightweight, modern and flexible Vue 3 plugin for creative, responsive object layouts.** It is intended for use in creative programming applications, digital signage
 solutions, and other applications where you need to position multiple _(sometimes dynamic)_ elements on the screen in a non-standard way.
 
 ## 📦 Installation
@@ -9,7 +9,7 @@ solutions, and other applications where you need to position multiple _(sometime
 npm install vue-ricochet
 ```
 
-Then simply call `app.use()` to install, wherever you create the VueJS app. Global options can also be passed using the second parameter.
+Then simply call `app.use(ricochet)` to install before mounting your application. Global options can also be passed using the second parameter.
 
 ```js
 import {createApp} from 'vue'
@@ -21,6 +21,8 @@ app.use(ricochet);
 
 app.mount('#app');
 ```
+
+Vue-ricochet will available globally in your application, under `this.$ricochet`, although most of the time you will use components/directives to interact with it.
 
 ## 🚀 Getting Started
 

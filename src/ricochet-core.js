@@ -30,7 +30,7 @@ class Ricochet {
     }
 
     /**
-     * The installation hook that VueJS uses to install the plugin
+     * The installation hook that Vue 3 uses to install the plugin
      * @param app
      * @param options
      */
@@ -51,7 +51,7 @@ class Ricochet {
 }
 
 /**
- * Ricochet is a lightweight JS library that integrates with VueJS and provides creative options for object positioning.
+ * Ricochet is a lightweight JS library that integrates with Vue 3 and provides creative options for object positioning.
  * @type {Ricochet}
  */
 const ricochetInstance = new Ricochet();
