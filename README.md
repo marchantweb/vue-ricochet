@@ -77,29 +77,3 @@ export default {
 ```
 
 As you can see from this example config above, you can pass any valid CSS value to properties (`px`, `%` `top, left, center, etc.)`. This allows you to position elements in a very flexible way. Vue-ricochet will automatically convert these values to pixels when it positions the elements; making highly-responsive layouts a breeze.
-
-### 3. Animating between layouts
-
-You can animate between layouts using the `animateTo()` method. This method accepts a config object as a parameter, and will animate the container to the new layout. You can also pass a duration, easing function, and callback function.
-
-For this to work, you'll need to add a ref to the ricochetContainer:
-
-```html
-<ricochetContainer :config="config" ref="myContainer">
-    <!-- Elements go here -->
-</ricochetContainer>
-```
-
-```js
-this.$refs.myContainer.animateTo({
-    shape: 'circle',
-    radius: '40%',
-    center: {
-        x: '50%',
-        y: '50%'
-    },
-    anchorElements: 'center center'
-}, 2000, 'easeInOut', () => {
-    console.log('We made the circle a little smaller!');
-});
-```
