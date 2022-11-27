@@ -85,6 +85,9 @@ export default {
      * @returns {[]|*}
      */
     calculateLayout(config) {
+      if (typeof config.shape === 'function') {
+        return config.shape(this.elements);
+      }
       if (config.shape === 'circle') {
         return layoutCircle(this.elements, {
           center: {
@@ -195,7 +198,7 @@ export default {
       gsap.to(this.priorLayouts[this.priorLayouts.length - 1], {
         exitPercentage: 1,
         duration: 1,
-        onUpdate : function(){
+        onUpdate: function () {
           this.repositionElements();
         }.bind(this),
       });
