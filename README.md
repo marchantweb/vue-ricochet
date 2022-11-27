@@ -75,3 +75,32 @@ export default {
 ```
 
 As you can see from this example config above, you can pass any valid CSS value to properties (`px`, `%` `top, left, center, etc.)`. This allows you to position elements in a very flexible way. Vue-ricochet will automatically convert these values to pixels when it positions the elements; making highly-responsive layouts a breeze.
+
+### 3. Custom Shape Functions
+
+You can also pass a custom function to the `shape` property, instead of using one of the predefined shape functions. This callback function will be passed all the elements as a parameter, and should return an array of objects with `x` and `y` properties, representing the positions to place those elements at within the container.
+
+Here's an example that takes each element, stacks it horizontally, and set's the vertical height based on a sine wave:
+
+```js
+export default {
+    data() {
+        return {
+            config: {
+                shape: function(elements = []){
+                    let output = [];
+                    let sumWidth = 0;
+                    for (const element of elements) {
+                        output.push({
+                            x: sumWidth,
+                            y: 300 + (Math.sin(new Date().getTime() / 400) * 100)
+                        });
+                        sumWidth += element.offsetWidth;
+                    }
+                    return output;
+                }
+            }
+        }
+    }
+}
+```
