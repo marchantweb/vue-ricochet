@@ -63,7 +63,7 @@ export default {
     data() {
         return {
             config: {
-                type: 'circle',
+                shape: 'circle',
                 radius: '80%',
                 center: {
                     x: '50%',
@@ -82,9 +82,17 @@ As you can see from this example config above, you can pass any valid CSS value 
 
 You can animate between layouts using the `animateTo()` method. This method accepts a config object as a parameter, and will animate the container to the new layout. You can also pass a duration, easing function, and callback function.
 
+For this to work, you'll need to add a ref to the ricochetContainer:
+
+```html
+<ricochetContainer :config="config" ref="myContainer">
+    <!-- Elements go here -->
+</ricochetContainer>
+```
+
 ```js
 this.$refs.myContainer.animateTo({
-    type: 'circle',
+    shape: 'circle',
     radius: '40%',
     center: {
         x: '50%',

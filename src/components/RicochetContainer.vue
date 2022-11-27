@@ -19,7 +19,7 @@ export default {
   props: {
     config: {
       default: {
-        type: 'line'
+        shape: 'line'
       },
     }
   },
@@ -72,14 +72,14 @@ export default {
         return;
       }
       this.elements = [].slice.call(this.$refs['ricochetContainer'].children);
-      if (this.config.type === 'circle') {
+      if (this.config.shape === 'circle') {
         this.layout = layoutCircle(this.elements, {
           center: {
             x: this.containerSize.width / 2,
             y: this.containerSize.height / 2
           },
         });
-      } else if (this.config.type === 'arc') {
+      } else if (this.config.shape === 'arc') {
         this.layout = layoutArc(this.elements, {
           center: {
             x: this.containerSize.width / 2,
@@ -88,7 +88,7 @@ export default {
           startAngle: 0,
           endAngle: 180,
         });
-      } else if (this.config.type === 'line') {
+      } else if (this.config.shape === 'line') {
         this.layout = layoutLine(this.elements, {
           start: {
             x: 50,

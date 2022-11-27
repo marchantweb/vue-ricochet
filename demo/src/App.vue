@@ -24,7 +24,7 @@ export default {
      */
     config() {
       return {
-        type: this.type
+        shape: this.type
       }
     }
 
