@@ -10,6 +10,8 @@
 
 <script>
 import _ from 'lodash';
+import {gsap} from 'gsap';
+
 import layoutChain from "../layouts/chain";
 import layoutCircle from "../layouts/circle";
 import layoutArc from "../layouts/arc";
@@ -27,12 +29,7 @@ export default {
     return {
       elements: [],
       layout: null,
-      priorLayouts: [
-        {
-          shape: 'circle',
-          exitPercentage: 0
-        }
-      ],
+      priorLayouts: [],
       changeObserver: null,
       resizeObserver: null,
       resizeElementObserver: null,
@@ -186,6 +183,17 @@ export default {
     this.setupObservers();
   }
   ,
+  watch: {
+
+    'config.shape'(newValue, oldValue) {
+      this.priorLayouts.push({
+        shape: oldValue,
+        exitPercentage: 0
+      });
+      gsap.to(this.priorLayouts[this.priorLayouts.length - 1], {exitPercentage: 1, duration: 1});
+    }
+
+  },
   beforeDestroy: function () {
 
     /**

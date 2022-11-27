@@ -15,6 +15,7 @@
     "creative programming"
   ],
   "dependencies": {
+    "gsap": "^3.11.3",
     "lodash": "^4.17.21"
   }
 }
