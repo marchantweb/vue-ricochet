@@ -1,0 +1,19 @@
+{
+  "name": "vue-ricochet",
+  "version": "0.0.1",
+  "description": "A lightweight, modern and flexible Vue 3 plugin for creative, responsive object layouts.",
+  "main": "index.js",
+  "authors": {
+    "name": "Simon Le Marchant",
+    "email": "simon@marchantweb.com"
+  },
+  "repository": "https://github.com/marchantweb/vue-ricochet/vue-ricochet",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.5.3"
+  }
+}
