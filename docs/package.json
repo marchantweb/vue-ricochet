@@ -10,7 +10,8 @@
   "repository": "https://github.com/marchantweb/vue-ricochet/vue-ricochet",
   "scripts": {
     "dev": "vuepress dev src",
-    "build": "vuepress build src"
+    "build": "vuepress build src",
+    "heroku-postbuild": "npm run build"
   },
   "license": "MIT",
   "devDependencies": {

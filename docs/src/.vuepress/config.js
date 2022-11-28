@@ -40,10 +40,6 @@ module.exports = {
       {
         text: 'Config',
         link: '/config/'
-      },
-      {
-        text: 'GitHub',
-        link: 'https://github.com/marchantweb/vue-ricochet'
       }
     ],
     sidebar: {
