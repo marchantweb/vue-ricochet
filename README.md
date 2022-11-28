@@ -5,6 +5,8 @@
 **A lightweight, modern and flexible Vue 3 plugin for creative, responsive object layouts.** It is intended for use in creative programming applications, digital signage
 solutions, and other applications where you need to position multiple _(sometimes dynamic)_ elements on the screen in a non-standard way.
 
+![Screen capture of vue-ricochet in action](./cover.gif)
+
 ## 📦 Installation
 
 ```bash

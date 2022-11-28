@@ -1,6 +1,6 @@
 {
   "name": "vue-ricochet",
-  "version": "0.0.49",
+  "version": "0.0.50",
   "description": "Ricochet is a lightweight JS library that integrates with Vue 3 and provides creative options for object positioning.",
   "license": "MIT",
   "author": "Simon Le Marchant<https://github.com/marchantweb>",
