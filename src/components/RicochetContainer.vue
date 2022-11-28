@@ -21,7 +21,8 @@ export default {
   props: {
     config: {
       default: {
-        shape: 'line'
+        shape: 'line',
+        shapeOptions: {}
       },
     }
   },
@@ -89,12 +90,7 @@ export default {
         return config.shape(this.elements);
       }
       if (config.shape === 'circle') {
-        return layoutCircle(this.elements, {
-          center: {
-            x: this.containerSize.width / 2,
-            y: this.containerSize.height / 2
-          },
-        });
+        return layoutCircle(this.elements, config.shapeOptions, this);
       } else if (config.shape === 'arc') {
         return layoutArc(this.elements, {
           center: {
