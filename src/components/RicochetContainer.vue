@@ -101,16 +101,7 @@ export default {
           endAngle: 180,
         });
       } else if (config.shape === 'line') {
-        return layoutLine(this.elements, {
-          start: {
-            x: 50,
-            y: 50
-          },
-          end: {
-            x: (this.containerSize.width) - 50,
-            y: (this.containerSize.height) - 50
-          },
-        });
+        return layoutLine(this.elements, config.shapeOptions, this);
       } else {
         return layoutChain(this.elements);
       }
