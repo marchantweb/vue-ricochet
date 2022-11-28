@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import _ from 'lodash';
 import {gsap} from 'gsap';
 
 import layoutChain from "../layouts/chain";
@@ -92,14 +91,7 @@ export default {
       if (config.shape === 'circle') {
         return layoutCircle(this.elements, config.shapeOptions, this);
       } else if (config.shape === 'arc') {
-        return layoutArc(this.elements, {
-          center: {
-            x: this.containerSize.width / 2,
-            y: this.containerSize.height / 2
-          },
-          startAngle: 0,
-          endAngle: 180,
-        });
+        return layoutArc(this.elements, config.shapeOptions, this);
       } else if (config.shape === 'line') {
         return layoutLine(this.elements, config.shapeOptions, this);
       } else {
