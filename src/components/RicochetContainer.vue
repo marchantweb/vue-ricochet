@@ -1,8 +1,7 @@
 <template>
   <canvas :width="containerSize.width" :height="containerSize.height" class="ricochet-canvas canvas__anchors" ref="ricochet-canvas-anchor"/>
   <div class="ricochet-container" ref="ricochetContainer">
-    <template v-for="(vnode, index) in $slots.default()" :key="index">
-      <!--suppress JSValidateTypes -->
+    <template v-for="(vnode, index) in $slots.default()">
       <component :is="vnode" :ref="'element--' + index" :style="elementStyles[index]"/>
     </template>
   </div>
@@ -59,8 +58,10 @@ export default {
         this.repositionElements();
       }.bind(this));
       // Observe the container for changes/resize
-      this.changeObserver.observe(this.$refs['ricochetContainer'], {attributes: false, childList: true, characterData: false, subtree: false});
-      this.resizeObserver.observe(this.$refs['ricochetContainer']);
+      if (this.$refs['ricochetContainer']) {
+        this.changeObserver.observe(this.$refs['ricochetContainer'], {attributes: false, childList: true, characterData: false, subtree: false});
+        this.resizeObserver.observe(this.$refs['ricochetContainer']);
+      }
       // Observe each element for resize
       for (const element of this.elements) {
         this.resizeElementObserver.observe(element);
