@@ -1,18 +1,18 @@
 <template>
   <main style="width: 100%; aspect-ratio: 1.6; border-radius: 5px; overflow: hidden; background-color: #EDEDED; position: relative;">
 
-    <!-- Start Ricochet Example -->
-    <ricochetContainer :config="config">
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-    </ricochetContainer>
-    <!-- End Ricochet Example -->
+    <ClientOnly>
+      <ricochetContainer :config="config">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+      </ricochetContainer>
+    </ClientOnly>
 
   </main>
 </template>

@@ -19,7 +19,6 @@
   "dependencies": {
     "@vuepress/client": "^2.0.0-beta.53",
     "@vuepress/utils": "^2.0.0-beta.53",
-    "gsap": "^3.0",
     "vue-ricochet": "^0.0.62"
   }
 }
