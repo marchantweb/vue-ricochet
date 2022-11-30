@@ -35,8 +35,11 @@ export default defineUserConfig({
                 link: '/guide/',
                 children: [
                     '/guide/getting-started.md',
-                    '/guide/demo.md',
                 ],
+            },
+            {
+                text: 'Demo',
+                link: '/guide/demo.md'
             },
         ],
     }),
