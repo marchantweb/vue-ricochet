@@ -1,9 +1,14 @@
 ---
 home: true
+title: Vue Ricochet
 heroImage: https://github.com/marchantweb/vue-ricochet/blob/main/hero.png?raw=true
-tagline: Object Positioning Library
-actionText: Quick Start →
-actionLink: /guide/
+actions:
+- text: Quick Start
+  link: /guide/
+  type: primary
+- text: View Demo
+  link: /guide/demo.html
+  type: secondary
 features:
 - title: Automatic Positioning
   details: Position any element you can imagine, including Vue components.

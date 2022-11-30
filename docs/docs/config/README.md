@@ -8,17 +8,19 @@ sidebar: auto
 
 ### Line
 
+<demoComponent />
+
 Draws the elements in a straight line. The configuration for a line only requires a start and end point, which looks like:
 
 ```json
 {
     "start": {
-      "x": 50, 
-      "y": 50
+      "x": "5%", 
+      "y": "5%"
     },
     "end": {
-      "x": 300,
-      "y": 300
+      "x": "95%",
+      "y": "95%"
     }
 }
 ```

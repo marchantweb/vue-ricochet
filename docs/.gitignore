@@ -2,3 +2,5 @@
 /sonarlint/
 /node_modules/
 /src/.vuepress/dist/
+.temp/
+.cache/

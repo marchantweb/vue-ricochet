@@ -1,5 +1,5 @@
 <template>
-  <main style="width: 100%; aspect-ratio: 1.6; border-radius: 5px; overflow: hidden; background-color: #EDEDED;">
+  <main style="width: 100%; aspect-ratio: 1.6; border-radius: 5px; overflow: hidden; background-color: #EDEDED; position: relative;">
 
     <!-- Start Ricochet Example -->
     <ricochetContainer :config="config">
@@ -16,10 +16,6 @@
 
   </main>
 </template>
-
-<script setup>
-import RicochetContainer from "../../../../src/components/RicochetContainer";
-</script>
 
 <script>
 
