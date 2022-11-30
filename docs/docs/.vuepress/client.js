@@ -1,5 +1,5 @@
 import {defineClientConfig} from '@vuepress/client'
-import ricochet from '../../../index'
+import ricochet from 'vue-ricochet'
 
 export default defineClientConfig({
     enhance({app, router, siteData}) {
