@@ -1,11 +1,7 @@
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'Demo',
-  components: {
-    HelloWorld
-  },
+  name: 'Local Testing Server',
   data() {
     return {
       shape: 'line'
@@ -49,11 +45,7 @@ export default {
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125"/>
-
     <div class="wrapper">
-      <HelloWorld msg="🥏 vue-ricochet"/>
-      <h5 style="font-weight: bold; width: 100%; text-align: center; margin-top: 40px;">Examples:</h5>
       <div style="margin-top: 20px; width: 100%; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
         <button @click.prevent="setShape('line')">Line</button>
         <button @click.prevent="setShape('circle')">Circle</button>
