@@ -22,7 +22,8 @@
 export default {
   data() {
     return {
-      shape: 'line'
+      shape: 'line',
+      intervalTimer: null,
     }
   },
   computed: {
@@ -37,6 +38,14 @@ export default {
       }
     }
 
+  },
+  mounted: function () {
+    this.intervalTimer = setInterval(() => {
+      this.shape = this.shape === 'line' ? 'circle' : 'line'
+    }, 2000)
+  },
+  beforeDestroy: function () {
+    clearInterval(this.intervalTimer)
   }
 }
 </script>
