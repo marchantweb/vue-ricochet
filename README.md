@@ -17,7 +17,7 @@ Then simply call `app.use(ricochet)` to install before mounting your application
 
 ```js
 import {createApp} from 'vue'
-import ricochet from 'vue-ricochet'
+import {ricochet} from 'vue-ricochet'
 
 const app = createApp().use(ricochet).mount('#app');
 ```

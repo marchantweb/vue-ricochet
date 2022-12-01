@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import ricochet from '../../src/index';
+import {ricochet} from '../../src/index';
 
 import './assets/main.css'
 

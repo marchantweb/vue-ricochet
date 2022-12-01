@@ -6,7 +6,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "lib"),
         filename: "vue-ricochet.min.js",
-        library: "$",
+        library: "VueRicochet",
         libraryTarget: "umd",
     },
     module: {
