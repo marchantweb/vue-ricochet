@@ -10,6 +10,10 @@
       <div class="block"></div>
       <div class="block"></div>
       <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
     </ricochetContainer>
 
   </div>

@@ -61,8 +61,17 @@ export default {
       for (const element of this.elements) {
         this.resizeElementObserver.observe(element);
       }
-    }
-    ,
+    },
+
+    /**
+     * Ensure we're always update the DOM should ambient motion exist in the configuration.
+     */
+    _handleAmbientMotion(){
+      if(this.config.loopElements){
+        this.repositionElements();
+      }
+      window.requestAnimationFrame(this._handleAmbientMotion);
+    },
 
     /**
      * Position elements in the ricochet container (throttled to the config FPS).
@@ -210,8 +219,8 @@ export default {
     this.updateContainerSize();
     this.repositionElements();
     this.setupObservers();
-  }
-  ,
+    window.requestAnimationFrame(this._handleAmbientMotion);
+  },
   watch: {
 
     'config.shape'(newValue, oldValue) {
