@@ -26,7 +26,7 @@ export default defineUserConfig({
         ],
         logo: 'https://github.com/marchantweb/vue-ricochet/blob/main/hero.png?raw=true',
         repo: 'https://github.com/marchantweb/vue-ricochet',
-        docsDir: 'docs',
+        docsDir: 'docs/docs',
         editLink: true,
         editLinkText: "Suggest an edit on GitHub",
         sidebar: [
@@ -47,5 +47,11 @@ export default defineUserConfig({
         registerComponentsPlugin({
             componentsDir: path.resolve(__dirname, './components'),
         }),
-    ]
+    ],
+    markdown: {
+        importCode: {
+            handleImportPath: (str) =>
+                str.replace(/^@demo/, path.resolve(__dirname, './components')),
+        },
+    },
 })
