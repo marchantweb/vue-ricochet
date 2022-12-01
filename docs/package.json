@@ -19,6 +19,6 @@
   "dependencies": {
     "@vuepress/client": "^2.0.0-beta.53",
     "@vuepress/utils": "^2.0.0-beta.53",
-    "vue-ricochet": "^0.0.64"
+    "vue-ricochet": "^0.0.77"
   }
 }
