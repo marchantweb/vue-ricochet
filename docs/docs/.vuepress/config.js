@@ -11,7 +11,13 @@ export default defineUserConfig({
     head: [
         ['meta', {name: 'theme-color', content: '#3eaf7c'}],
         ['meta', {name: 'apple-mobile-web-app-capable', content: 'yes'}],
-        ['meta', {name: 'apple-mobile-web-app-status-bar-style', content: 'black'}]
+        ['meta', {name: 'apple-mobile-web-app-status-bar-style', content: 'black'}],
+        ['link', { rel: "apple-touch-icon", sizes: "180x180", href: "/images/favicon.png"}],
+        ['link', { rel: "icon", type: "image/png", sizes: "32x32", href: "/images/favicon.png"}],
+        ['link', { rel: "icon", type: "image/png", sizes: "16x16", href: "/images/favicon.png"}],
+        ['link', { rel: "shortcut icon", href: "/images/favicon.png"}],
+        ['meta', { name: "msapplication-TileColor", content: '#3eaf7c'}],
+        ['meta', { name: "theme-color", content: '#3eaf7c'}],
     ],
     theme: defaultTheme({
         navbar: [
@@ -24,7 +30,7 @@ export default defineUserConfig({
                 link: '/config/'
             }
         ],
-        logo: 'https://github.com/marchantweb/vue-ricochet/blob/main/hero.png?raw=true',
+        logo: '/images/favicon.png',
         repo: 'https://github.com/marchantweb/vue-ricochet',
         docsDir: 'docs/docs',
         editLink: true,
