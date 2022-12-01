@@ -1,10 +1,13 @@
 {
   "name": "vue-ricochet",
-  "version": "0.0.64",
+  "version": "0.0.73",
   "description": "Ricochet is a lightweight JS library that integrates with Vue 3 and provides creative options for object positioning.",
   "license": "MIT",
   "author": "Simon Le Marchant<https://github.com/marchantweb>",
-  "main": "index.js",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "webpack"
+  },
   "keywords": [
     "digital signage",
     "positioning",
@@ -16,5 +19,20 @@
   ],
   "dependencies": {
     "gsap": "^3.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "@vue/compiler-sfc": "^3.2.45",
+    "babel-loader": "^9.1.0",
+    "css-loader": "^6.7.2",
+    "node-sass": "^8.0.0",
+    "sass-loader": "^13.2.0",
+    "vue": "^3.2.36",
+    "vue-loader": "^17.0.1",
+    "vue-style-loader": "^4.1.3",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0"
   }
 }
