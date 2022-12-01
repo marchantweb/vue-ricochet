@@ -12,15 +12,4 @@ sidebar: auto
 
 Draws the elements in a straight line. The configuration for a line only requires a start and end point, which looks like:
 
-```json
-{
-    "start": {
-      "x": "5%", 
-      "y": "5%"
-    },
-    "end": {
-      "x": "95%",
-      "y": "95%"
-    }
-}
-```
+@[code js](../../node_modules/vue-ricochet/src/layouts/line.js)

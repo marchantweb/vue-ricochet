@@ -1,29 +1,28 @@
 /**
  * Draw a circle with the elements
- * @param elements - The DOM elements to position
  * @param options - The options for the shape
- * @param ricochetContainer - A reference to the specific container
+ * @returns {function(*): {x, y}} - Returns a function that accepts a percentage 0-1 and returns a point on the circle
  * @returns {*[]}
  */
-export default function layoutCircle(elements = [], options = null, ricochetContainer = null) {
+export default function layoutCircle(options = null) {
 
     // Merge in default options
     options = Object.assign({
         center: {
-            x: ricochetContainer.containerSize.width / 2,
-            y: ricochetContainer.containerSize.height / 2
+            x: 500,
+            y: 400
         },
-        radius: ricochetContainer.containerSize.width / 4
+        radius: 300
     }, options);
 
-    let output = [];
-    for (let i = 0; i < elements.length; i++) {
-        const element = elements[i];
-        const indexAsPercentage = (1 / elements.length) * i;
-        output.push({
-            x: options.center.x + (Math.cos((360 * indexAsPercentage) * (Math.PI / 180)) * options.radius) - element.offsetWidth / 2,
-            y: options.center.y + (Math.sin((360 * indexAsPercentage) * (Math.PI / 180)) * options.radius) - element.offsetHeight / 2
-        });
+    /**
+     * Return a function that can position a point of any given percentage (0-1) along the circle
+     */
+    return (percentage) => {
+        return {
+            x: options.center.x + (Math.cos((360 * percentage) * (Math.PI / 180)) * options.radius),
+            y: options.center.y + (Math.sin((360 * percentage) * (Math.PI / 180)) * options.radius)
+        };
     }
-    return output;
+
 }

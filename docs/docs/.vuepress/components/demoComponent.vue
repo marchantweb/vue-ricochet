@@ -32,7 +32,8 @@ export default {
      */
     config() {
       return {
-        shape: this.shape
+        shape: this.shape,
+        loopElements: true,
       }
     }
 

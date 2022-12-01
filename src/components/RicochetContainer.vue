@@ -17,12 +17,7 @@ import layoutLine from "../layouts/line";
 
 export default {
   props: {
-    config: {
-      default: {
-        shape: 'line',
-        shapeOptions: {}
-      },
-    }
+    config: null,
   },
   data() {
     return {
@@ -77,7 +72,7 @@ export default {
         return;
       }
       this.elements = [].slice.call(this.$refs['ricochetContainer'].children);
-      this.layout = this.calculateLayout(this.config);
+      this.layout = this.calculateLayout(this.mergedConfig);
     },
 
     /**
@@ -90,14 +85,56 @@ export default {
         return config.shape(this.elements);
       }
       if (config.shape === 'circle') {
-        return layoutCircle(this.elements, config.shapeOptions, this);
+        const shapeGenerator = layoutCircle();
+        return this.calculateObjectPositions(shapeGenerator, config);
       } else if (config.shape === 'arc') {
-        return layoutArc(this.elements, config.shapeOptions, this);
+        const shapeGenerator = layoutArc();
+        return this.calculateObjectPositions(shapeGenerator, config);
       } else if (config.shape === 'line') {
-        return layoutLine(this.elements, config.shapeOptions, this);
+        const shapeGenerator = layoutLine();
+        return this.calculateObjectPositions(shapeGenerator, config);
       } else {
         return layoutChain(this.elements);
       }
+    },
+
+    /**
+     * Takes a passed shape generator and applies it to each element in the container.
+     * @param shapeGenerator - The callback function to generate a point along the designated shape.
+     * @param config - The configuration object for the layout.
+     */
+    calculateObjectPositions(shapeGenerator = null, config = null) {
+      const output = [];
+      for (let i = 0; i < this.elements.length; i++) {
+        const element = this.elements[i];
+        let percentage = ((1 / (this.elements.length - (config?.loopElements || config.shape === 'circle' ? 0 : 1))) * i);
+        if (config?.loopElements) {
+          percentage += ((new Date().getTime() % 10000) / 10000);
+        }
+        if (percentage > 1) {
+          percentage -= (~~percentage);
+        } else if (percentage < 0) {
+          percentage -= (~~percentage - 1);
+        }
+        const positionOnShape = shapeGenerator(percentage);
+        if (config?.elementAnchor?.includes("top")) {
+          //
+        } else if (config?.elementAnchor?.includes("bottom")) {
+          positionOnShape.y -= element.offsetHeight;
+        } else {
+          positionOnShape.y -= (element.offsetHeight / 2);
+        }
+        if (config?.elementAnchor?.includes("left")) {
+          //
+        } else if (config?.elementAnchor?.includes("right")) {
+          positionOnShape.x -= element.offsetWidth;
+        } else {
+          positionOnShape.x -= (element.offsetWidth / 2);
+        }
+
+        output.push(positionOnShape);
+      }
+      return output;
     },
 
     /**
@@ -115,13 +152,20 @@ export default {
   computed: {
 
     /**
-     * How many elements are in our container?
-     * @returns {number}
+     * Sets the base configuration options for the ricochet container.
+     * @returns {{shape: string, loopElements: boolean, shapeOptions: {}, elementAnchor: string}}
      */
-    elementCount() {
-      return this.elements.length;
-    }
-    ,
+    mergedConfig: function () {
+      return {
+        ...{
+          shape: 'line',
+          shapeOptions: {},
+          elementAnchor: 'center center',
+          loopElements: true,
+        },
+        ...this.config
+      }
+    },
 
     /**
      * Returns an array of styles for each element in the container.
