@@ -17,6 +17,10 @@ It's open source and completely free to use. It is intended for use in creative 
 **Vue Ricochet is in alpha release**, and is likely to have breaking changes as development progresses. It is not recommended to use it in production applications at this time.
 :::
 
+### Why "Ricochet"?
+
+I often found myself describing what I do for work in creative programming as _"bouncing things around the screen"_, so the name Vue Ricochet seemed appropriate.
+
 ## How It Works
 
 At a surface level, Vue Ricochet wraps groups of DOM elements in a parent container, and then applies absolute positioning to those elements. It takes a shape generator function and any passed parameters, and uses the output to determine where to position elements on the X/Y axis.
