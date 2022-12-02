@@ -33,15 +33,27 @@ Under the hood, it's a bit more complex. Multiple mutation and resize observers 
 
 ### Quickly position elements using built-in shapes
 
-Vue Ricochet comes with a handful of _"shape functions"_ to get you started:
+Vue Ricochet comes with a handful of shapes to get you started.
 
 - [Line](../config/#line)
 - [Circle](#)
 - [Arc](#)
 
-While deceptively simple, you can build a lot just by using these shapes and modifying the parameters. You can also stack layouts within other layouts for nested effects, and modify shapes on-the-fly to transition smoothly between them.
+While deceptively simple, you can build a lot just by using these shapes and modifying the parameters. You can also stack containers within other containers for nested effects, and modify shapes on-the-fly to transition smoothly between them.
+
+### Use relative positioning/sizing in configuration
 
 Shape parameters, such as position, radius, angles, etc. can be passed using either fixed values (`px`) or using relative values such as `50%`. For an example, a circle might be placed with a center position of `{x: "50%", y: "50%"}` and a radius of `40%`. Vue Ricochet will calculate those values based on the dimensions of the container.
+
+### Position elements based on their DOM attributes
+
+While shapes are preferable in most cases, sometimes you need the ability to position elements based on their DOM attributes. For example, you might want to position elements based on their size, or what classes are applied. You can do this by using a layout function instead of a shape function.
+
+#### Built-in Layouts:
+
+- [Chain](#)
+
+The downside of layouts is that a lot of core features _(such as wrapping elements from one end of a shape to another is not possible)_. However, you can still use relative positioning and sizing, and you can still use nested containers.
 
 ### Build your own custom shapes and layouts
 
