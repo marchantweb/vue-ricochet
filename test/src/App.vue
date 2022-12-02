@@ -4,15 +4,22 @@ export default {
   name: 'Local Testing Server',
   data() {
     return {
-      shape: 'line'
+      shape: 'line',
+      layout: null
     }
   },
   methods: {
     setShape(type) {
-      this.shape = type
+      this.shape = type;
+      this.layout = null;
     },
-    setCustomShape(){
-      this.shape = function(elements = []){
+    setLayout(type){
+      this.shape = null;
+      this.layout = type;
+    },
+    setCustomLayout(){
+      this.shape = null;
+      this.layout = function(elements = []){
         let output = [];
         let sumWidth = 0;
         for (const element of elements) {
@@ -35,7 +42,8 @@ export default {
      */
     config() {
       return {
-        shape: this.shape
+        shape: this.shape,
+        layout: this.layout,
       }
     }
 
@@ -47,11 +55,11 @@ export default {
   <header>
     <div class="wrapper">
       <div style="margin-top: 20px; width: 100%; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-        <button @click.prevent="setShape('line')">Line</button>
-        <button @click.prevent="setShape('circle')">Circle</button>
-        <button @click.prevent="setShape('arc')">Arc</button>
-        <button @click.prevent="setShape('chain')">Chain</button>
-        <button @click.prevent="setCustomShape">Custom Callback</button>
+        <button @click.prevent="setShape('line')">Shape: Line</button>
+        <button @click.prevent="setShape('circle')">Shape: Circle</button>
+        <button @click.prevent="setShape('arc')">Shape: Arc</button>
+        <button @click.prevent="setLayout('chain')">Layout: Chain</button>
+        <button @click.prevent="setCustomLayout">Custom Layout</button>
       </div>
     </div>
   </header>

@@ -27,8 +27,6 @@ export default {
       changeObserver: null,
       resizeObserver: null,
       resizeElementObserver: null,
-      //repositionElements: _.throttle(this._handleReposition, (1000 / this.$ricochet._config.fps), {'trailing': false, 'leading': true}),
-      repositionElements: this._handleReposition,
       containerSize: {
         width: 0,
         height: 0
@@ -43,14 +41,14 @@ export default {
      */
     setupObservers() {
       this.changeObserver = new MutationObserver(function (mutations) {
-        this.repositionElements();
+        this._handleReposition();
       }.bind(this));
       this.resizeObserver = new ResizeObserver(function (entries) {
         this.updateContainerSize();
-        this.repositionElements();
+        this._handleReposition();
       }.bind(this));
       this.resizeElementObserver = new ResizeObserver(function (entries) {
-        this.repositionElements();
+        this._handleReposition();
       }.bind(this));
       // Observe the container for changes/resize
       if (this.$refs['ricochetContainer']) {
@@ -66,9 +64,9 @@ export default {
     /**
      * Ensure we're always update the DOM should ambient motion exist in the configuration.
      */
-    _handleAmbientMotion(){
-      if(this.config.loopElements){
-        this.repositionElements();
+    _handleAmbientMotion() {
+      if (this.config.loopElements) {
+        this._handleReposition();
       }
       window.requestAnimationFrame(this._handleAmbientMotion);
     },
@@ -90,21 +88,45 @@ export default {
      * @returns {[]|*}
      */
     calculateLayout(config) {
-      if (typeof config.shape === 'function') {
-        return config.shape(this.elements);
+      let shapeGenerator = false;
+
+      // List of built-in shape functions
+      const shapeFunctionMapping = {
+        'line': layoutLine,
+        'circle': layoutCircle,
+        'arc': layoutArc,
+      };
+
+      // List of built-in layout functions
+      const layoutFunctionMapping = {
+        'chain': layoutChain
       }
-      if (config.shape === 'circle') {
-        const shapeGenerator = layoutCircle(config, this.containerSize);
-        return this.calculateObjectPositions(shapeGenerator, config);
-      } else if (config.shape === 'arc') {
-        const shapeGenerator = layoutArc(config, this.containerSize);
-        return this.calculateObjectPositions(shapeGenerator, config);
-      } else if (config.shape === 'line') {
-        const shapeGenerator = layoutLine(config, this.containerSize);
-        return this.calculateObjectPositions(shapeGenerator, config);
+
+      // Look for layout functions
+      if (!config.shape) {
+        if (config.layout in layoutFunctionMapping) {
+          // Return the layout object from the mapping
+          return layoutFunctionMapping[config.layout](this.elements);
+        } else if (typeof config.layout === 'function') {
+          // Return the layout object from user-passed layout
+          return config.layout(this.elements);
+        }
+      }
+
+      // Continue with a shape function
+      if (config.shape in shapeFunctionMapping) {
+        // Get the shape generator function from the mapping
+        shapeGenerator = shapeFunctionMapping[config.shape](config.containerOptions, this.containerSize);
+      } else if (typeof config.shape === 'function') {
+        // Get the shape generator function from user-passed shape
+        shapeGenerator = config.shape(config.containerOptions, this.containerSize);
       } else {
-        return layoutChain(this.elements);
+        console.error(config);
+        throw new Error("Vue Ricochet: Invalid shape function or layout function passed.");
       }
+
+      // Return the layout object from the shape generator
+      return this.getLayoutFromShapeGenerator(shapeGenerator, config);
     },
 
     /**
@@ -112,11 +134,17 @@ export default {
      * @param shapeGenerator - The callback function to generate a point along the designated shape.
      * @param config - The configuration object for the layout.
      */
-    calculateObjectPositions(shapeGenerator = null, config = null) {
+    getLayoutFromShapeGenerator(shapeGenerator = null, config = null) {
       const output = [];
+
       for (let i = 0; i < this.elements.length; i++) {
         const element = this.elements[i];
+
+        // Determine the percentage along the shape to position the element
+        // If the configuration uses any looping, or is circular, we leave space at the end for the first element to loop back to.
         let percentage = ((1 / (this.elements.length - (config?.loopElements || config.shape === 'circle' ? 0 : 1))) * i);
+
+        // Handle automatic rotation (looping/wrapping) over time
         if (config?.loopElements) {
           percentage += ((new Date().getTime() % 10000) / 10000);
         }
@@ -125,24 +153,30 @@ export default {
         } else if (percentage < 0) {
           percentage -= (~~percentage - 1);
         }
+
         const positionOnShape = shapeGenerator(percentage);
+
+        // Offset the element's position by its anchor point
         if (config?.elementAnchor?.includes("top")) {
-          //
+          // No change
         } else if (config?.elementAnchor?.includes("bottom")) {
           positionOnShape.y -= element.offsetHeight;
         } else {
           positionOnShape.y -= (element.offsetHeight / 2);
         }
         if (config?.elementAnchor?.includes("left")) {
-          //
+          // No change
         } else if (config?.elementAnchor?.includes("right")) {
           positionOnShape.x -= element.offsetWidth;
         } else {
           positionOnShape.x -= (element.offsetWidth / 2);
         }
 
+        // Add the position to the output
         output.push(positionOnShape);
       }
+
+      // All done!
       return output;
     },
 
@@ -162,13 +196,13 @@ export default {
 
     /**
      * Sets the base configuration options for the ricochet container.
-     * @returns {{shape: string, loopElements: boolean, shapeOptions: {}, elementAnchor: string}}
      */
     mergedConfig: function () {
       return {
         ...{
           shape: 'line',
-          shapeOptions: {},
+          layout: null,
+          containerOptions: {},
           elementAnchor: 'center center',
           loopElements: true,
         },
@@ -205,8 +239,10 @@ export default {
       if (this.priorLayouts.length) {
         this.priorLayouts.forEach((priorLayoutConfig) => {
           this.calculateLayout(priorLayoutConfig).forEach((priorLayout, elementIndex) => {
-            blendedLayout[elementIndex].x = blendedLayout[elementIndex].x + ((1 - priorLayoutConfig.exitPercentage) * (priorLayout.x - blendedLayout[elementIndex].x))
-            blendedLayout[elementIndex].y = blendedLayout[elementIndex].y + ((1 - priorLayoutConfig.exitPercentage) * (priorLayout.y - blendedLayout[elementIndex].y))
+            if (blendedLayout[elementIndex]) {
+              blendedLayout[elementIndex].x = blendedLayout[elementIndex].x + ((1 - priorLayoutConfig.exitPercentage) * (priorLayout.x - blendedLayout[elementIndex].x))
+              blendedLayout[elementIndex].y = blendedLayout[elementIndex].y + ((1 - priorLayoutConfig.exitPercentage) * (priorLayout.y - blendedLayout[elementIndex].y))
+            }
           });
         });
       }
@@ -217,24 +253,42 @@ export default {
   ,
   mounted() {
     this.updateContainerSize();
-    this.repositionElements();
+    this._handleReposition();
     this.setupObservers();
     window.requestAnimationFrame(this._handleAmbientMotion);
   },
   watch: {
 
     'config.shape'(newValue, oldValue) {
-      this.priorLayouts.push({
-        shape: oldValue,
-        exitPercentage: 0
-      });
-      gsap.to(this.priorLayouts[this.priorLayouts.length - 1], {
-        exitPercentage: 1,
-        duration: 1,
-        onUpdate: function () {
-          this.repositionElements();
-        }.bind(this),
-      });
+      if (oldValue) {
+        this.priorLayouts.push({
+          shape: oldValue,
+          exitPercentage: 0
+        });
+        gsap.to(this.priorLayouts[this.priorLayouts.length - 1], {
+          exitPercentage: 1,
+          duration: 1,
+          onUpdate: function () {
+            this._handleReposition();
+          }.bind(this),
+        });
+      }
+    },
+
+    'config.layout'(newValue, oldValue) {
+      if (oldValue) {
+        this.priorLayouts.push({
+          layout: oldValue,
+          exitPercentage: 0
+        });
+        gsap.to(this.priorLayouts[this.priorLayouts.length - 1], {
+          exitPercentage: 1,
+          duration: 1,
+          onUpdate: function () {
+            this._handleReposition();
+          }.bind(this),
+        });
+      }
     },
 
   },

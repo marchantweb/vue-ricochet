@@ -1,6 +1,6 @@
 # Custom Shapes/Layouts
 
-You can also pass custom functions to the `shape` property, instead of using one of the predefined functions. There are two ways to do this, using a **shape function** or using a **layout function**.
+You can also pass custom functions to the `shape` and `layout` properties, instead of using one of the predefined functions. Shapes and layouts work a little differently, depending on your needs. Only one can be defined within a configuration at a time, with the `shape` property taking priority if both are supplied.
 
 ::: tip
 Not sure which type of function to use? **Most of the time you want to use a shape function, unless you need access to DOM attributes** _(size, classes, etc.)_ to determine the output - then use the
