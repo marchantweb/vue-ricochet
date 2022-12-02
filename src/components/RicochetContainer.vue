@@ -94,13 +94,13 @@ export default {
         return config.shape(this.elements);
       }
       if (config.shape === 'circle') {
-        const shapeGenerator = layoutCircle();
+        const shapeGenerator = layoutCircle(config, this.containerSize);
         return this.calculateObjectPositions(shapeGenerator, config);
       } else if (config.shape === 'arc') {
-        const shapeGenerator = layoutArc();
+        const shapeGenerator = layoutArc(config, this.containerSize);
         return this.calculateObjectPositions(shapeGenerator, config);
       } else if (config.shape === 'line') {
-        const shapeGenerator = layoutLine();
+        const shapeGenerator = layoutLine(config, this.containerSize);
         return this.calculateObjectPositions(shapeGenerator, config);
       } else {
         return layoutChain(this.elements);
