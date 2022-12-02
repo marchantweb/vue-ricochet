@@ -1,3 +1,10 @@
+---
+# NavLink
+next:
+    text: Get Started / Installation
+    link: /guide/getting-started.html
+---
+
 # Introduction
 
 #### **🥏 Vue Ricochet is a lightweight, modern and flexible Vue 3 plugin for responsive object layouts.**
