@@ -9,6 +9,8 @@ layout function.
 
 ### Option A: Using a shape function _(recommended)_
 
+Define shape functions within the `shape` configuration parameter of `ricochetContainer`.
+
 A shape function calculates and returns a callback. That callback function should accept a percentage (between `0` and `1`) that represents where on the shape to place an individual element, and
 return a position object in the format: `{x: 0, y: 0}`.
 
@@ -29,6 +31,8 @@ export default function diagonalLine(config = null, containerSize = {width: 0, h
 ```
 
 ### Option B: Using a layout function
+
+Define layout functions within the `layout` configuration parameter of `ricochetContainer`.
 
 A layout function returns an array of element positions. The function should accept an array of all the elements as a parameter, and should return an array of objects with `x` and `y` properties, representing the positions to place those respective elements. Elements are ordered as they appear in the DOM.
 
