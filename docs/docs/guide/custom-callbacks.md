@@ -30,8 +30,7 @@ export default function diagonalLine(config = null, containerSize = {width: 0, h
 
 ### Option B: Using a layout function
 
-This callback function will be passed all the elements as a parameter, and should return an array of objects with `x` and `y` properties, representing the positions to place those elements at within
-the container.
+A layout function returns an array of element positions. The function should accept an array of all the elements as a parameter, and should return an array of objects with `x` and `y` properties, representing the positions to place those respective elements. Elements are ordered as they appear in the DOM.
 
 Here's an example that takes each element and stacks it horizontally and vertically. This requires access to each element's DOM attributes to get the width/height.
 
