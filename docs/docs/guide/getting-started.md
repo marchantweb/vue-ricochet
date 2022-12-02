@@ -20,7 +20,7 @@ const app = createApp().use(ricochet).mount('#app');
 
 Vue Ricochet will available globally in your application, under `this.$ricochet`, although most of the time you will use components/directives to interact with it.
 
-## Adding your first container
+## Using Ricochet
 
 ### 1. Start with a `<ricochetContainer>`
 
