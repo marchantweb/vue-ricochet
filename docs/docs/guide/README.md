@@ -1,9 +1,14 @@
 # Introduction
 
-**🥏 Vue Ricochet is a lightweight, modern and flexible Vue 3 plugin for creative, responsive object layouts.** It is intended for use in creative programming applications, digital signage
-solutions, and other applications where you need to position multiple _(sometimes dynamic)_ elements on the screen in a non-standard way.
+#### **🥏 Vue Ricochet is a lightweight, modern and flexible Vue 3 plugin for responsive object layouts.**
+
+It's open source and completely free to use. It is intended for use in creative programming applications, digital signage solutions, and other applications where you need to position multiple dynamic elements on the screen in a non-standard way.
 
 ![Screen capture of vue-ricochet in action](https://github.com/marchantweb/vue-ricochet/blob/main/cover.gif?raw=true)
+
+::: warning
+**Vue Ricochet is in alpha release**, and is likely to have breaking changes as development progresses. It is not recommended to use it in production applications at this time.
+:::
 
 ## How It Works
 
@@ -15,16 +20,18 @@ Under the hood, it's a bit more complex. Multiple mutation and resize observers 
 
 ## Features
 
-### Built-in layouts
+### Quickly position elements using built-in shapes
 
-Vue Ricochet comes with a handful of parameterized layouts (shapes) to get you started:
+Vue Ricochet comes with a handful of _"shape functions"_ to get you started:
 
 - [Line](../config/#line)
 - [Circle](#)
 - [Arc](#)
 
-While deceptively simple, you can build a lot just by using these three shapes and modifying the parameters. You can also stack layouts within other layouts for chained effects.
+While deceptively simple, you can build a lot just by using these shapes and modifying the parameters. You can also stack layouts within other layouts for nested effects, and modify shapes on-the-fly to transition smoothly between them.
 
-### Custom shapes
+Shape parameters, such as position, radius, angles, etc. can be passed using either fixed values (`px`) or using relative values such as `50%`. For an example, a circle might be placed with a center position of `{x: "50%", y: "50%"}` and a radius of `40%`. Vue Ricochet will calculate those values based on the dimensions of the container.
 
-You can also define your own custom shapes by passing a callback function. This allows you to create any shape you can imagine, including complex shapes that are not possible with the basic built-in layouts.
+### Build your own custom shapes and layouts
+
+Vue Ricochet supports both custom shape functions and custom layouts. A shape function returns a callback to position an element anywhere along the shape, whereas a layout function explicitly places each element _(often based on its own properties: width, height, etc.)_

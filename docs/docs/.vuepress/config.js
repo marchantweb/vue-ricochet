@@ -41,6 +41,7 @@ export default defineUserConfig({
                 link: '/guide/',
                 children: [
                     '/guide/getting-started.md',
+                    '/guide/custom-callbacks.md'
                 ],
             },
             {
@@ -48,6 +49,7 @@ export default defineUserConfig({
                 link: '/guide/demo.md'
             },
         ],
+        sidebarDepth: 1
     }),
     plugins: [
         registerComponentsPlugin({
