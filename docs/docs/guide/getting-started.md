@@ -59,7 +59,7 @@ export default {
         return {
             config: {
                 shape: 'circle',
-                shapeConfig: {                    
+                containerOptions: {                    
                     center: {
                         x: '50%',
                         y: '50%'
