@@ -1,7 +1,9 @@
 <template>
-  <canvas :width="containerSize.width" :height="containerSize.height" class="ricochet-canvas canvas__anchors" ref="ricochet-canvas-anchor"/>
+  <canvas :width="containerSize.width" :height="containerSize.height" class="ricochet-canvas canvas__anchors"
+          ref="ricochet-canvas-anchor"/>
   <div class="ricochet-container" ref="ricochetContainer">
     <template v-for="(vnode, index) in $slots.default()">
+      <!--suppress JSValidateTypes -->
       <component :is="vnode" :ref="'element--' + index" :style="elementStyles[index]"/>
     </template>
   </div>
@@ -40,19 +42,24 @@ export default {
      * Setup observers to watch for changes to the container and its children.
      */
     setupObservers() {
-      this.changeObserver = new MutationObserver(function (mutations) {
+      this.changeObserver = new MutationObserver(function () {
         this._handleReposition();
       }.bind(this));
-      this.resizeObserver = new ResizeObserver(function (entries) {
+      this.resizeObserver = new ResizeObserver(function () {
         this.updateContainerSize();
         this._handleReposition();
       }.bind(this));
-      this.resizeElementObserver = new ResizeObserver(function (entries) {
+      this.resizeElementObserver = new ResizeObserver(function () {
         this._handleReposition();
       }.bind(this));
       // Observe the container for changes/resize
       if (this.$refs['ricochetContainer']) {
-        this.changeObserver.observe(this.$refs['ricochetContainer'], {attributes: false, childList: true, characterData: false, subtree: false});
+        this.changeObserver.observe(this.$refs['ricochetContainer'], {
+          attributes: false,
+          childList: true,
+          characterData: false,
+          subtree: false
+        });
         this.resizeObserver.observe(this.$refs['ricochetContainer']);
       }
       // Observe each element for resize
@@ -134,7 +141,9 @@ export default {
      * @param shapeGenerator - The callback function to generate a point along the designated shape.
      * @param config - The configuration object for the layout.
      */
-    getLayoutFromShapeGenerator(shapeGenerator = null, config = null) {
+    getLayoutFromShapeGenerator(shapeGenerator = () => {
+      return false
+    }, config = null) {
       const output = [];
 
       for (let i = 0; i < this.elements.length; i++) {
@@ -154,23 +163,12 @@ export default {
           percentage -= (~~percentage - 1);
         }
 
+        // Get the element's X/Y position from the shape generator
         const positionOnShape = shapeGenerator(percentage);
 
         // Offset the element's position by its anchor point
-        if (config?.elementAnchor?.includes("top")) {
-          // No change
-        } else if (config?.elementAnchor?.includes("bottom")) {
-          positionOnShape.y -= element.offsetHeight;
-        } else {
-          positionOnShape.y -= (element.offsetHeight / 2);
-        }
-        if (config?.elementAnchor?.includes("left")) {
-          // No change
-        } else if (config?.elementAnchor?.includes("right")) {
-          positionOnShape.x -= element.offsetWidth;
-        } else {
-          positionOnShape.x -= (element.offsetWidth / 2);
-        }
+        positionOnShape["x"] -= this.getElementOffset(element, config)["x"];
+        positionOnShape["y"] -= this.getElementOffset(element, config)["y"];
 
         // Add the position to the output
         output.push(positionOnShape);
@@ -178,6 +176,32 @@ export default {
 
       // All done!
       return output;
+    },
+
+    getElementOffset(element, config) {
+
+      // Horizontal offset
+      let offsetX = element.offsetWidth / 2;
+      if (config?.elementAnchor?.includes("left")) {
+        offsetX = 0;
+      } else if (config?.elementAnchor?.includes("right")) {
+        offsetX =  element.offsetWidth;
+      }
+
+      // Vertical offset
+      let offsetY = element.offsetHeight / 2;
+      if (config?.elementAnchor?.includes("top")) {
+        offsetY = 0;
+      } else if (config?.elementAnchor?.includes("bottom")) {
+        offsetY =  element.offsetHeight;
+      }
+
+      // All done
+      return {
+        x: offsetX,
+        y: offsetY
+      }
+
     },
 
     /**
@@ -232,7 +256,7 @@ export default {
 
     /**
      * Outputs the final layout by taking the current layout and blending prior layouts based on their interpolated weight as they exit.
-     * @returns {null}
+     * @returns [{x: number, y: number}]
      */
     outputLayout() {
       let blendedLayout = this.layout;
