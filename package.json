@@ -1,12 +1,12 @@
 {
   "name": "vue-ricochet",
-  "version": "0.0.96",
+  "version": "0.0.97",
   "description": "Ricochet is a lightweight JS library that integrates with Vue 3 and provides creative options for object positioning.",
   "license": "MIT",
   "author": "Simon Le Marchant<https://github.com/marchantweb>",
   "main": "src/index.js",
   "scripts": {
-    "version-patch": "npm version patch --no-git-tag-version --no-commit-hooks",
+    "version-patch": "npm version --no-git-tag-version --no-commit-hooks patch",
     "update-docs-library": "cd docs/ && npm install vue-ricochet@latest"
   },
   "pre-commit": [
