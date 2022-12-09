@@ -20,11 +20,11 @@ const app = createApp().use(ricochet).mount('#app');
 
 Vue Ricochet will available globally in your application, under `this.$ricochet`, although most of the time you will use components/directives to interact with it.
 
-## Using Ricochet
+## Basic Usage
 
 ### 1. Start with a `<ricochetContainer>`
 
-Using Vue Ricochet, your elements are positioned within containers. Think of a container like a list of DOM elements _(or components)_ you want to draw to the screen.
+Using Vue Ricochet, your elements are positioned within containers. Think of a container like a list of DOM elements _(or components)_ you want to draw to the screen, that accepts parameters to tell it how to lay those elements out.
 
 ```html{3,8}
 <template>
@@ -45,7 +45,7 @@ You can throw in as many elements as you want, nest them multiple levels deep, a
 
 ### 2. Configure how the container lays out the elements
 
-You can pass configuration parameters as a `config` object on the container. To see a list of available options, see the [VueContainer reference](#).
+You can pass configuration parameters as a `config` object on the container. To see a list of available options, see the [VueContainer reference](/config/vueContainer.html).
 
 ```html
 <ricochetContainer :config="config">

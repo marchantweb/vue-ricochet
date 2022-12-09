@@ -26,8 +26,8 @@ export default defineUserConfig({
                 link: '/guide/',
             },
             {
-                text: 'Config',
-                link: '/config/'
+                text: 'Demo',
+                link: '/guide/demo.md'
             }
         ],
         logo: '/images/favicon.png',
@@ -42,6 +42,18 @@ export default defineUserConfig({
                 children: [
                     '/guide/getting-started.md',
                     '/guide/custom-callbacks.md'
+                ],
+            },
+            {
+                text: 'Configuration Reference',
+                children: [
+                    {
+                        text: 'Shape Functions',
+                        children: [
+                            '/config/shapes/line.md'
+                        ],
+                    },
+                    '/config/vueContainer.md'
                 ],
             },
             {

@@ -35,7 +35,7 @@ Under the hood, it's a bit more complex. Multiple mutation and resize observers 
 
 Vue Ricochet comes with a handful of shapes to get you started.
 
-- [Line](../config/#line)
+- [Line](/config/shapes/line.html)
 - [Circle](#)
 - [Arc](#)
 

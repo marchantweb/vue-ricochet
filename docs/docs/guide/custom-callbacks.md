@@ -1,4 +1,4 @@
-# Custom Shapes/Layouts
+# Custom Shape/Layout Callbacks
 
 You can also pass custom functions to the `shape` and `layout` properties, instead of using one of the predefined functions. Shapes and layouts work a little differently, depending on your needs. Only one can be defined within a configuration at a time, with the `shape` property taking priority if both are supplied.
 

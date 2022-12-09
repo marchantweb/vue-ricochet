@@ -1,14 +1,6 @@
----
-sidebar: auto
----
+# `Line`
 
-# Config
-
-## Built-in shape functions
-
-### Line
-
-**The line shape function takes the elements within the container and lays them out in a line, in any direction.** While this may be overkill for horizontal/vertical layouts, it can be useful for laying out elements in a diagonal line, or transition elements from a regular stack into a different shape.
+**The line shape function takes the elements within the container and lays them out in a line, in any orientation.** While this may be overkill for horizontal/vertical layouts that could be achieved using flexbox, it can be useful for laying out elements in a diagonal line, or transitioning elements from a regular stack into a different shape.
 
 <demoLine />
 

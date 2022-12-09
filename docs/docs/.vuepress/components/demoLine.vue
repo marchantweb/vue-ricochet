@@ -26,12 +26,12 @@ const config = ref({
   shape: 'line',
   shapeParameters: {
     start: {
-      x: "5%",
-      y: "50%"
+      x: "10%",
+      y: "10%"
     },
     end: {
-      x: "95%",
-      y: "50%"
+      x: "90%",
+      y: "90%"
     },
   }
 });
