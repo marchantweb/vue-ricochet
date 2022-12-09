@@ -29,7 +29,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 const config = ref({
   shape: 'line',
-  containerOptions: {
+  shapeParameters: {
     start: {
       x: "10%",
       y: "50%"

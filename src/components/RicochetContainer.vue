@@ -123,10 +123,10 @@ export default {
       // Continue with a shape function
       if (config.shape in shapeFunctionMapping) {
         // Get the shape generator function from the mapping
-        shapeGenerator = shapeFunctionMapping[config.shape](config.containerOptions, this.containerSize);
+        shapeGenerator = shapeFunctionMapping[config.shape](config.shapeParameters, this.containerSize);
       } else if (typeof config.shape === 'function') {
         // Get the shape generator function from user-passed shape
-        shapeGenerator = config.shape(config.containerOptions, this.containerSize);
+        shapeGenerator = config.shape(config.shapeParameters, this.containerSize);
       } else {
         console.error(config);
         throw new Error("Vue Ricochet: Invalid shape function or layout function passed.");
@@ -226,7 +226,7 @@ export default {
         ...{
           shape: 'line',
           layout: null,
-          containerOptions: {},
+          shapeParameters: {},
           elementAnchor: 'center center',
           loopElements: true,
         },

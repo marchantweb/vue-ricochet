@@ -24,7 +24,7 @@ import { ref } from 'vue';
 
 const config = ref({
   shape: 'line',
-  containerOptions: {
+  shapeParameters: {
     start: {
       x: "5%",
       y: "50%"
