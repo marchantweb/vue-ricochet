@@ -16,6 +16,9 @@ import layoutChain from "../layouts/chain";
 import layoutCircle from "../layouts/circle";
 import layoutArc from "../layouts/arc";
 import layoutLine from "../layouts/line";
+import layoutSquare from "../layouts/square";
+import layoutFigureEight from "../layouts/figureEight";
+import layoutBezier from "../layouts/bezier";
 
 export default {
   props: {
@@ -102,6 +105,9 @@ export default {
         'line': layoutLine,
         'circle': layoutCircle,
         'arc': layoutArc,
+        'square': layoutSquare,
+        'figureEight': layoutFigureEight,
+        'bezier': layoutBezier
       };
 
       // List of built-in layout functions
