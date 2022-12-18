@@ -19,6 +19,7 @@ import layoutLine from "../layouts/line";
 import layoutSquare from "../layouts/square";
 import layoutFigureEight from "../layouts/figureEight";
 import layoutBezier from "../layouts/bezier";
+import layoutPolyhedron from "../layouts/polyhedron";
 
 export default {
   props: {
@@ -107,7 +108,8 @@ export default {
         'arc': layoutArc,
         'square': layoutSquare,
         'figureEight': layoutFigureEight,
-        'bezier': layoutBezier
+        'bezier': layoutBezier,
+        'polyhedron': layoutPolyhedron,
       };
 
       // List of built-in layout functions

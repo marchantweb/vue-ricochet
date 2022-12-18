@@ -61,6 +61,7 @@ export default {
         <button @click.prevent="setShape('square')">Shape: Square</button>
         <button @click.prevent="setShape('figureEight')">Shape: Figure Eight</button>
         <button @click.prevent="setShape('bezier')">Shape: Bezier Curve</button>
+        <button @click.prevent="setShape('polyhedron')">Shape: Polyhedron</button>
         <button @click.prevent="setLayout('chain')">Layout: Chain</button>
         <button @click.prevent="setCustomLayout">Custom Layout</button>
       </div>
